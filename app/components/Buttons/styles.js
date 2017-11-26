@@ -10,9 +10,13 @@ export default EStylesheet.create({
 		marginTop: 55,
 		alignItems: "center"
 	},
+	wrapper: {
+		flexDirection: "row",
+		alignItems: "center"
+	},
+	icon: {},
 	text: {
 		fontWeight: "bold",
 		fontSize: 20
 	}
-
 });

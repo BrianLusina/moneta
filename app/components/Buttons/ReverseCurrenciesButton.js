@@ -5,24 +5,31 @@
  */
 
 import React from "react";
-import {View, StyleSheet, Text} from "react-native";
+import { View, TouchableOpacity, Text, Image } from "react-native";
 import PropTypes from "prop-types";
 import styles from "./styles";
 
-const ReverseCurrenciesButton = ({ onClick }) => {
+const ReverseCurrenciesButton = ({ onClick, text }) => {
 	return (
-		<View style={styles.container}>
-			<Text style={styles.text}>
-			</Text>
-		</View>
-	)
+		<TouchableOpacity onPress={onClick} style={styles.container}>
+			<View style={styles.wrapper}>
+				<Image
+					resizeMode="contain"
+					style={styles.icon}
+					source={require("./images/icon.png")}
+				/>
+				<Text style={styles.text}>{text}</Text>
+			</View>
+		</TouchableOpacity>
+	);
 };
 
 /**
  * Prop validation
  */
 ReverseCurrenciesButton.propTypes = {
-	onClick : PropTypes.func.isRequired
-}
+	text: PropTypes.string.isRequired,
+	onClick: PropTypes.func.isRequired
+};
 
 export default ReverseCurrenciesButton;

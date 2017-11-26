@@ -3,14 +3,21 @@
  * @notes: App container component
  */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import { Text, View, StatusBar, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {
+	Text,
+	View,
+	StatusBar,
+	Keyboard,
+	TouchableWithoutFeedback
+} from "react-native";
 import styles from "./config/styles";
 import Logo from "./components/Logo/Logo";
 import InputWithButton from "./components/TextInput/InputWithButton";
+import ReverseCurrenciesButton from "./components/Buttons/ReverseCurrenciesButton";
 
 /**
  * App container component
@@ -20,19 +27,18 @@ import InputWithButton from "./components/TextInput/InputWithButton";
 export class App extends Component {
 	constructor(props, context) {
 		super(props, context);
-		this.state = {
-
-		}
+		this.state = {};
 
 		this.handlePressBaseCurrency = this.handlePressBaseCurrency.bind(this);
-		this.handlePressQuoteCurrency = this.handlePressQuoteCurrency.bind(this);		
+		this.handlePressQuoteCurrency = this.handlePressQuoteCurrency.bind(this);
 		this.handleTextChange = this.handleTextChange.bind(this);
+		this.handleSwapCurrencies = this.handleSwapCurrencies.bind(this);
 	}
 
 	/**
 	 * Handles press on base currency
 	 */
-	handlePressBaseCurrency(){
+	handlePressBaseCurrency() {
 		console.log("handle base currency");
 	}
 
@@ -40,7 +46,7 @@ export class App extends Component {
 	 * @function handlePressQuoteCurrency
 	 * This handles presses on the Quote currency
 	 */
-	handlePressQuoteCurrency(){
+	handlePressQuoteCurrency() {
 		console.log("Handle quote");
 	}
 
@@ -48,7 +54,7 @@ export class App extends Component {
 	 * Handles text change
 	 * @param {String} text The text input received from the input
 	 */
-	handleTextChange(text){
+	handleTextChange(text) {
 		console.log("Text", text);
 	}
 
@@ -56,29 +62,41 @@ export class App extends Component {
 	 * @function
 	 * Dismises the keyboard when the use touches outside the text inputs
 	 */
-	handleTouchableWithoutFeedback(){
+	handleTouchableWithoutFeedback() {
 		Keyboard.dismiss();
 	}
+
+	/**
+	 * @function
+	 * Swaps the base and quote currencies
+	 */
+	handleSwapCurrencies() {}
 
 	render() {
 		return (
 			<TouchableWithoutFeedback onPress={this.handleTouchableWithoutFeedback}>
 				<View style={styles.container}>
-					<StatusBar translucent={false} barStyle="light-content"/>
+					<StatusBar translucent={false} barStyle="light-content" />
 					<Logo />
-				
-					<InputWithButton 
+
+					<InputWithButton
 						buttonText={"USD"}
 						keyboadType="numeric"
 						onChangeText={this.handleTextChange}
 						defaultValue={"45"}
-						onPress={this.handlePressBaseCurrency}/>
-				
-					<InputWithButton 
+						onPress={this.handlePressBaseCurrency}
+					/>
+
+					<InputWithButton
 						buttonText={"GPB"}
 						editable={false}
 						onPress={this.handlePressQuoteCurrency}
-						value={"85"}/>				
+						value={"85"}
+					/>
+					<ReverseCurrenciesButton
+						onClick={this.handleSwapCurrencies}
+						text={"Reverse Currencies"}
+					/>
 				</View>
 			</TouchableWithoutFeedback>
 		);
@@ -119,4 +137,4 @@ function mapDispatchToProps(dispatch) {
  * actions to the store and props of this container to
  * state of store
  */
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);
