@@ -7,7 +7,7 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import { Text, View, StatusBar } from "react-native";
+import { Text, View, StatusBar, Keyboard, TouchableWithoutFeedback } from "react-native";
 import styles from "./config/styles";
 import Logo from "./components/Logo/Logo";
 import InputWithButton from "./components/TextInput/InputWithButton";
@@ -53,25 +53,35 @@ export class App extends Component {
 		console.log("Text", text);
 	}
 
+	/**
+	 * @function
+	 * Dismises the keyboard when the use touches outside the text inputs
+	 */
+	handleTouchableWithoutFeedback(){
+		Keyboard.dismiss();
+	}
+
 	render() {
 		return (
-			<View style={styles.container}>
-				<StatusBar translucent={false} barStyle="light-content"/>
-				<Logo />
+			<TouchableWithoutFeedback onPress={this.handleTouchableWithoutFeedback}>
+				<View style={styles.container}>
+					<StatusBar translucent={false} barStyle="light-content"/>
+					<Logo />
 				
-				<InputWithButton 
-					buttonText={"USD"}
-					keyboadType="numeric"
-					onChangeText={this.handleTextChange}
-					defaultValue="45"
-					onPress={this.handlePressBaseCurrency}/>
+					<InputWithButton 
+						buttonText={"USD"}
+						keyboadType="numeric"
+						onChangeText={this.handleTextChange}
+						defaultValue={"45"}
+						onPress={this.handlePressBaseCurrency}/>
 				
-				<InputWithButton 
-					buttonText={"GPB"}
-					editable={false}
-					onPress={this.handlePressQuoteCurrency}
-					value="85"/>				
-			</View>
+					<InputWithButton 
+						buttonText={"GPB"}
+						editable={false}
+						onPress={this.handlePressQuoteCurrency}
+						value={"85"}/>				
+				</View>
+			</TouchableWithoutFeedback>
 		);
 	}
 }

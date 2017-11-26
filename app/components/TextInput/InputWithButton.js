@@ -25,8 +25,8 @@ const InputWithButton = ({onPress, buttonText, editable = true}) => {
 
 	return(
 		<View style={containerStyles}>
-            <TouchableHighlight 
-                underlayColor={underlayColor}
+			<TouchableHighlight 
+				underlayColor={underlayColor}
 				style={styles.buttonContainer}
 				onPress={onPress}>
 				<Text style={styles.buttonText}>{buttonText}</Text>
