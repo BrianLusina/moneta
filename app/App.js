@@ -12,6 +12,7 @@ import {
 	View,
 	StatusBar,
 	Keyboard,
+	KeyboardAvoidingView,
 	TouchableWithoutFeedback
 } from "react-native";
 import styles from "./config/styles";
@@ -19,6 +20,7 @@ import Logo from "./components/Logo/Logo";
 import InputWithButton from "./components/TextInput/InputWithButton";
 import ReverseCurrenciesButton from "./components/Buttons/ReverseCurrenciesButton";
 import LastConvertedText from "./components/Text/LastConvertedText";
+import Header from "./components/Header/Header";
 
 /**
  * App container component
@@ -34,6 +36,7 @@ export class App extends Component {
 		this.handlePressQuoteCurrency = this.handlePressQuoteCurrency.bind(this);
 		this.handleTextChange = this.handleTextChange.bind(this);
 		this.handleSwapCurrencies = this.handleSwapCurrencies.bind(this);
+		this.handleOptionsPress = this.handleOptionsPress.bind(this);
 	}
 
 	/**
@@ -73,37 +76,46 @@ export class App extends Component {
 	 */
 	handleSwapCurrencies() {}
 
+	/**
+	 * Handles Options/Settings Click
+	 */
+	handleOptionsPress() {}
+
 	render() {
 		return (
 			<TouchableWithoutFeedback onPress={this.handleTouchableWithoutFeedback}>
 				<View style={styles.container}>
 					<StatusBar translucent={false} barStyle="light-content" />
-					<Logo />
+					<Header onClick={this.handleOptionsPress} />
 
-					<InputWithButton
-						buttonText={"USD"}
-						keyboadType="numeric"
-						onChangeText={this.handleTextChange}
-						defaultValue={"45"}
-						onPress={this.handlePressBaseCurrency}
-					/>
+					<KeyboardAvoidingView behavior="padding">
+						<Logo />
 
-					<InputWithButton
-						buttonText={"GPB"}
-						editable={false}
-						onPress={this.handlePressQuoteCurrency}
-						value={"85"}
-					/>
-					<LastConvertedText
-						date={new Date()}
-						baseCurrency={"USD"}
-						quoteCurrency={"GPB"}
-						conversionRate={0.789}
-					/>
-					<ReverseCurrenciesButton
-						onClick={this.handleSwapCurrencies}
-						text={"Reverse Currencies"}
-					/>
+						<InputWithButton
+							buttonText={"USD"}
+							keyboadType="numeric"
+							onChangeText={this.handleTextChange}
+							defaultValue={"45"}
+							onPress={this.handlePressBaseCurrency}
+						/>
+
+						<InputWithButton
+							buttonText={"GPB"}
+							editable={false}
+							onPress={this.handlePressQuoteCurrency}
+							value={"85"}
+						/>
+						<LastConvertedText
+							date={new Date()}
+							baseCurrency={"USD"}
+							quoteCurrency={"GPB"}
+							conversionRate={0.789}
+						/>
+						<ReverseCurrenciesButton
+							onClick={this.handleSwapCurrencies}
+							text={"Reverse Currencies"}
+						/>
+					</KeyboardAvoidingView>
 				</View>
 			</TouchableWithoutFeedback>
 		);
