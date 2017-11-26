@@ -33,7 +33,10 @@
     "port": 5678
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!react|@expo|expo)"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^6.2.0",

@@ -10,7 +10,7 @@ describe("ajaxReducer ", () => {
 		initialState = {
 			callsInProgress: 0,
 			isFetching: false,
-			error : {}
+			error: {}
 		};
 	});
 

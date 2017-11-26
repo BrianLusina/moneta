@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import { Text, View, StatusBar } from "react-native";
-import styles from "./styles";
+import styles from "./config/styles";
 
 /**
  * App container component

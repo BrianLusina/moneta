@@ -1,8 +1,10 @@
 import expect from 'expect';
-import {createStore} from 'redux';
-import rootReducer from '../src/reducers/rootReducer';
-import initialState from '../src/reducers/initialState';
-import * as actions from '../src/actions/';
+import {
+	createStore
+} from 'redux';
+import rootReducer from '../../app/reducers/rootReducer';
+import initialState from '../../app/reducers/initialState';
+import * as ajaxActions from '../../app/actionCreators/ajaxActionCreator';
 
 
 describe("Redux store", function () {
