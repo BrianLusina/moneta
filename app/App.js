@@ -10,6 +10,8 @@ import {bindActionCreators} from "redux";
 import { Text, View, StatusBar } from "react-native";
 import styles from "./config/styles";
 import Logo from "./components/Logo/Logo";
+import InputWithButton from "./components/TextInput/InputWithButton";
+import { teal } from "../../../../../.cache/typescript/2.6/node_modules/@types/color-name";
 
 /**
  * App container component
@@ -19,7 +21,36 @@ import Logo from "./components/Logo/Logo";
 export class App extends Component {
 	constructor(props, context) {
 		super(props, context);
+		this.state = {
 
+		}
+
+		this.handlePressBaseCurrency = this.handlePressBaseCurrency.bind(this);
+		this.handlePressQuoteCurrency = this.handlePressQuoteCurrency.bind(this);		
+		this.handleTextChange = this.handleTextChange.bind(this);
+	}
+
+	/**
+	 * Handles press on base currency
+	 */
+	handlePressBaseCurrency(){
+		console.log("handle base currency");
+	}
+
+	/**
+	 * @function handlePressQuoteCurrency
+	 * This handles presses on the Quote currency
+	 */
+	handlePressQuoteCurrency(){
+		console.log("Handle quote");
+	}
+
+	/**
+	 * Handles text change
+	 * @param {String} text The text input received from the input
+	 */
+	handleTextChange(text){
+		console.log("Text", text);
 	}
 
 	render() {
@@ -27,6 +58,19 @@ export class App extends Component {
 			<View style={styles.container}>
 				<StatusBar translucent={false} barStyle="light-content"/>
 				<Logo />
+				
+				<InputWithButton 
+					buttonText={"USD"}
+					keyboadType="numeric"
+					onChangeText={this.handleTextChange}
+					defaultValue="45"
+					onPress={this.handlePressBaseCurrency}/>
+				
+				<InputWithButton 
+					buttonText={"GPB"}
+					editable={false}
+					onPress={this.handlePressQuoteCurrency}
+					value="85"/>				
 			</View>
 		);
 	}
