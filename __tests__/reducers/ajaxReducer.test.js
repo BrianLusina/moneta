@@ -3,7 +3,7 @@ import ajaxReducer from '../../app/reducers/ajaxReducer';
 import * as actions from '../../app/actionCreators/ajaxActionCreator';
 
 describe("ajaxReducer ", () => {
-	let intialState = {};
+	let initialState;
 
 	beforeEach(() => {
 		initialState = {

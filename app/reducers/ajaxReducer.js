@@ -13,7 +13,7 @@ import initialState from "./initialState";
  * @param action function to dispatch to store
  * @return {Object} new state or initial state*/
 export default function ajaxReducer(state = initialState.ajax, action) {
-	let currentCalls = state.callsInProgress
+	let currentCalls = state.callsInProgress;
 	switch (action.type) {
 	case types.AJAX_CALL_BEGIN:
 		return Object.assign({}, state, {

@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import { Text, View, StatusBar } from "react-native";
 import styles from "./config/styles";
+import Logo from "./components/Logo/Logo";
 
 /**
  * App container component
@@ -25,7 +26,7 @@ export class App extends Component {
 		return (
 			<View style={styles.container}>
 				<StatusBar translucent={false} barStyle="light-content"/>
-				<Text>Moneta</Text>
+				<Logo />
 			</View>
 		);
 	}
