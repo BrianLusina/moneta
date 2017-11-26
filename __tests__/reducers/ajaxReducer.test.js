@@ -1,7 +1,6 @@
 import expect from 'expect';
 import ajaxReducer from '../../app/reducers/ajaxReducer';
 import * as actions from '../../app/actionCreators/ajaxActionCreator';
-import initialState from "../../app/reducers/initialState";
 
 describe("ajaxReducer ", () => {
 	let intialState = {};
@@ -23,12 +22,13 @@ describe("ajaxReducer ", () => {
 
 		// ASSERT
 		expect(newState.isFetching).toEqual(true);
+		expect(newState.callsInProgress).toEqual(1);
 
 		// old state is not mutated
 		expect(initialState.isFetching).toEqual(false)
 	});
 
-	it("should perform ajaxCallBeginAction without mutating state", () => {
+	it("should perform ajaxCallFailureAction without mutating state", () => {
 		const error = {
 			message: "Failed to fetch data"
 		};
@@ -49,7 +49,7 @@ describe("ajaxReducer ", () => {
 		expect(initialState.error.message).toBeUndefined();
 	});
 
-	it("should perform ajaxCallBeginAction without mutating state", () => {
+	it("should perform ajaxCallSuccessAction without mutating state", () => {
 
 		const action = actions.ajaxCallSuccess();
 
@@ -58,7 +58,7 @@ describe("ajaxReducer ", () => {
 
 		// ASSERT
 		expect(newState.isFetching).toEqual(false);
-		expect(newState.callsInProgress).toEqual(1);
+		expect(newState.callsInProgress).toEqual(0);
 
 		// old state is not mutated
 		expect(initialState.isFetching).toEqual(false);
