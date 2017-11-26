@@ -12,7 +12,7 @@ import initialState from "./initialState";
  * @param state initial state of the application store
  * @param action function to dispatch to store
  * @return {Object} new state or initial state*/
-export default function ajaxReducer(state = initialState, action) {
+export default function ajaxReducer(state = initialState.ajax, action) {
 	switch (action.type) {
 	case types.AJAX_CALL_BEGIN:
 		return state;

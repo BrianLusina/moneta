@@ -25,9 +25,7 @@ export class App extends Component {
 		return (
 			<View style={styles.container}>
 				<StatusBar translucent={false} barStyle="light-content"/>
-				<Text>Open up App.js to start working on you app!</Text>
-				<Text>Changes you make will automatically reload.</Text>
-				<Text>Shake your phone to open the developer menu.</Text>
+				<Text>Moneta</Text>
 			</View>
 		);
 	}
