@@ -5,7 +5,9 @@ build/
 .env/
 .env
 .expo/
-### Node template
+__snapshots__/
+*.js.snap
+## Node template
 # Logs
 logs
 *.log

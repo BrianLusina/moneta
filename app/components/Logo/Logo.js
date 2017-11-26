@@ -17,7 +17,7 @@ const Logo = () => {
 					style={styles.image} 
 					source={require("./images/logo.png")}/>
 			</ImageBackground>
-			<Text style={styles.text}> Moneta</Text>
+			<Text style={styles.text}>Moneta</Text>
 		</View>
 	);
 };

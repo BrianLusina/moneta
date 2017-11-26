@@ -11,7 +11,6 @@ import { Text, View, StatusBar, Keyboard, TouchableWithoutFeedback } from "react
 import styles from "./config/styles";
 import Logo from "./components/Logo/Logo";
 import InputWithButton from "./components/TextInput/InputWithButton";
-import { teal } from "../../../../../.cache/typescript/2.6/node_modules/@types/color-name";
 
 /**
  * App container component

@@ -46,6 +46,6 @@ InputWithButton.propTypes = {
 	onPress: PropTypes.func.isRequired,
 	buttonText: PropTypes.string.isRequired,
 	editable: PropTypes.bool
-}
+};
 
 export default InputWithButton;
