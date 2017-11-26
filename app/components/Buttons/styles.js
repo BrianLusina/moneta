@@ -14,9 +14,14 @@ export default EStylesheet.create({
 		flexDirection: "row",
 		alignItems: "center"
 	},
-	icon: {},
+	icon: {
+		width:19,
+		marginRight:11
+	},
 	text: {
-		fontWeight: "bold",
-		fontSize: 20
+		fontWeight: "300",
+		fontSize: 20,
+		color:"$white",
+		paddingVertical:20
 	}
 });

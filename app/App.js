@@ -18,6 +18,7 @@ import styles from "./config/styles";
 import Logo from "./components/Logo/Logo";
 import InputWithButton from "./components/TextInput/InputWithButton";
 import ReverseCurrenciesButton from "./components/Buttons/ReverseCurrenciesButton";
+import LastConvertedText from "./components/Text/LastConvertedText";
 
 /**
  * App container component
@@ -92,6 +93,12 @@ export class App extends Component {
 						editable={false}
 						onPress={this.handlePressQuoteCurrency}
 						value={"85"}
+					/>
+					<LastConvertedText
+						date={new Date()}
+						baseCurrency={"USD"}
+						quoteCurrency={"GPB"}
+						conversionRate={0.789}
 					/>
 					<ReverseCurrenciesButton
 						onClick={this.handleSwapCurrencies}
