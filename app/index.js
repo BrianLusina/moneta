@@ -8,6 +8,9 @@ const store = configureStore();
 
 EStyleSheet.build({
 	$primaryBlue: "#4F6D7A",
+	$primaryOrange:"#d57866",
+	$primaryGreen:"#00BD9D",
+	$primaryPurple:"#9E768F",
 	$white: "#fff",
 	$border: "#E2E2E2",
 	$inputText: "#797979",

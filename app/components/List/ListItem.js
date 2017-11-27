@@ -17,8 +17,11 @@ import Icon from "./Icon";
  * @param {Boolean} checkMark PropType specifying whether the current ListItem should display Tick
  * @param {Boolean} visible Whether the checkmark should be visible
  * @param {Function} onClick Handler that will be called when this list item is clicked
+ * @param {Object} customIcon Custom icon element that will be used in the settings component Will
+ * default to null as this custom icon will not be used for all Parent components being used
+ * @param {String} iconBackground Color of icon background
  * */
-const ListItem = ({text, selected = false, checkMark=true, visible=true, onClick}) => {
+const ListItem = ({text, selected = false, checkMark = true, visible = true, onClick, customIcon = null, iconBackground}) => {
 	return (
 		<TouchableHighlight onPress={onClick} underlayColor={styles.$underlayColor}>
 			<View style={styles.row}>
@@ -26,10 +29,12 @@ const ListItem = ({text, selected = false, checkMark=true, visible=true, onClick
 				{
 					selected
 						?
-						<Icon checkMark={checkMark} visible={visible}/>
+						<Icon checkMark={checkMark} visible={visible}
+							  iconBackground={iconBackground}/>
 						:
-						<Icon />
+						<Icon/>
 				}
+				{customIcon}
 			</View>
 		</TouchableHighlight>
 	)
@@ -39,11 +44,13 @@ const ListItem = ({text, selected = false, checkMark=true, visible=true, onClick
  * Prop Validation
  * */
 ListItem.propTypes = {
-	text : PropTypes.string.isRequired,
-	selected: PropTypes.bool.isRequired,
+	text: PropTypes.string.isRequired,
+	selected: PropTypes.bool,
 	checkMark: PropTypes.bool,
 	visible: PropTypes.bool,
 	onClick: PropTypes.func.isRequired,
+	customIcon: PropTypes.element,
+	iconBackground: PropTypes.string,
 };
 
 export default ListItem;
