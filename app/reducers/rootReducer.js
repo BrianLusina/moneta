@@ -5,14 +5,14 @@
 
 import {combineReducers} from "redux";
 import ajax from "./ajaxReducer";
-
+import currency from "../containers/currencylist/reducer";
 
 /**
  * Combines all reducers for use in the application
  * Uses short hand property names from ES6
  * */
 const rootReducer = combineReducers({
-	ajax
+	ajax, currency,
 });
 
 export default rootReducer;

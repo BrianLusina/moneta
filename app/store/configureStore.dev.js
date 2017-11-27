@@ -7,10 +7,10 @@ import {createStore, applyMiddleware, compose} from "redux";
 import rootReducer from "../reducers/rootReducer";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import logger from "redux-logger";
-import promise from "redux-promise";
+import thunk from "redux-thunk";
 import devTools from "remote-redux-devtools";
 
-const middleWare = applyMiddleware(promise, reduxImmutableStateInvariant(), logger);
+const middleWare = applyMiddleware(thunk, reduxImmutableStateInvariant(), logger);
 
 /**
  * Configures the application store
