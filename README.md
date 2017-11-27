@@ -1,6 +1,6 @@
-# Moneta
-
 ![moneta_logo](./assets/web_hi_res_512.png)
+
+# Moneta
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/74cd0001-10c9-4f9a-932b-1ecbd4adc2e3/branches/develop/badge)](https://appcenter.ms)
 [![Build Status](https://travis-ci.org/BrianLusina/moneta.svg?branch=master)](https://travis-ci.org/BrianLusina/moneta)
