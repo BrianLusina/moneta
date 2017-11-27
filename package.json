@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "codecov": "^3.0.0",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-15": "^1.0.5",
     "enzyme-adapter-react-16": "^1.1.0",
@@ -36,8 +37,10 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch ./__tests__/*.test.js",
+    "test:coverage": "npm run test -- --coverage",
+    "lint:init": "node_modules/eslint/bin/eslint.js --init",
     "lint": "node_modules/eslint/bin/eslint.js app/",
-    "lint:fix": "node_modules/eslint app --fix"
+    "lint:fix": "node_modules/eslint/bin/eslint-js app --fix"
   },
   "remotedev": {
     "hostname": "localhost",

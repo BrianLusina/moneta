@@ -1,5 +1,20 @@
 {
   "expo": {
-    "sdkVersion": "22.0.0"
+    "sdkVersion": "22.0.0",
+    "ios": {
+      "bundleIdentifier": "com.moneta"
+    },
+    "android": {
+      "package": "com.moneta"
+    },
+    "name": "moneta",
+    "icon":"./assets/ic_moneta.png",
+    "slug": "moneta",
+    "version": "0.1.0",
+    "isDetached": false,
+    "detach": {
+      "scheme": "expba2e7dad28724d2f8059acb874baac52",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v1.20.0-sdk21.0.0-38791499-fe99-4600-950d-cf7e2e85cea9.tar.gz"
+    }
   }
 }

@@ -1,0 +1,50 @@
+language: node_js
+sudo: false
+
+node_js:
+  - "8"
+  - '7'
+  - '6.1'
+
+#env:
+#  - REACT_APP_GOOGLE_MAPS_API_KEY=$REACT_APP_GOOGLE_MAPS_API_KEY
+
+matrix:
+  allow_failures:
+    - node: 8
+
+cache:
+  directories:
+    - node_modules
+
+notifications:
+  email: false
+
+branches:
+  only:
+    - develop
+    - master
+
+before_script:
+  - npm install
+
+script:
+  - npm run test
+  - npm run test:coverage
+  - codecov
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+# TODO: setup build
+#before_deploy:
+#  - npm run build
+#  # - npm run deploy
+#
+#deploy:
+#  provider: releases
+#  skip_cleanup: true
+#  github_token: $GITHUB_TOKEN
+#  file: "build"
+#  on:
+#    tags: true
