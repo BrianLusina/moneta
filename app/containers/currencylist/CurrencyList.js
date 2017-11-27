@@ -10,7 +10,7 @@ import {bindActionCreators} from "redux";
 import {View, StatusBar, Text, FlatList} from "react-native";
 import currencies from "./data";
 import CurrencyListItem from "../../components/List/ListItem";
-import Separator from "../../components/List/Seperator";
+import Separator from "../../components/List/Separator";
 
 /**
  * CurrencyList container component

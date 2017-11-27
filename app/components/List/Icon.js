@@ -38,8 +38,8 @@ const Icon = ({checkMark, visible}) => {
  * visible will be used to tell this component whether this icon should be visible
  * */
 Icon.propTypes = {
-	checkMark: PropTypes.bool.isRequired,
-	visible: PropTypes.bool.isRequired,
+	checkMark: PropTypes.bool,
+	visible: PropTypes.bool,
 };
 
 export default Icon;

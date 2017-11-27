@@ -28,7 +28,7 @@ const ListItem = ({text, selected = false, checkMark=true, visible=true, onClick
 						?
 						<Icon checkMark={checkMark} visible={visible}/>
 						:
-						<Icon checkMark={checkMark} visible={visible}/>
+						<Icon />
 				}
 			</View>
 		</TouchableHighlight>
