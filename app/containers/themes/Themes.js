@@ -3,14 +3,15 @@
  * @notes:
  */
 
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {ScrollView, StatusBar, View} from "react-native";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { ScrollView, StatusBar, View } from "react-native";
 import ListItem from "../../components/List/ListItem";
 import Separator from "../../components/List/Separator";
 import styles from "./styles";
+import * as actions from "./actions";
 
 /**
  * Themes container component
@@ -20,7 +21,6 @@ import styles from "./styles";
 export class Themes extends Component {
 	constructor(props, context) {
 		super(props, context);
-
 	}
 
 	/**
@@ -29,41 +29,44 @@ export class Themes extends Component {
 	createThemeList() {
 		const themeOptions = [
 			{
-				text: "blue", color: styles.$blue
+				text: "blue",
+				color: styles.$blue
 			},
 			{
-				text: "orange", color: styles.$orange
+				text: "orange",
+				color: styles.$orange
 			},
 			{
-				text: "green", color: styles.$green
+				text: "green",
+				color: styles.$green
 			},
 			{
-				text: "purple", color: styles.$purple
-			},
+				text: "purple",
+				color: styles.$purple
+			}
 		];
 
 		return themeOptions.map(theme => {
 			return (
 				<View>
-					<ListItem text={theme.text}
-							  onClick={() => this.handleThemePress(theme.color)}
-							  selected={false}
-							  checkMark={false}
-							  iconBackground={theme.color}
+					<ListItem
+						text={theme.text}
+						onClick={() => this.handleThemePress(theme.color)}
+						selected={false}
+						checkMark={false}
+						iconBackground={theme.color}
 					/>
-					<Separator/>
+					<Separator />
 				</View>
-			)
-		})
+			);
+		});
 	}
 
 	/**
 	 * Handles theme press on an item. This will set the theme of the application when clicked
 	 * @param {String} color The color theme of the list item selected
 	 * */
-	handleThemePress(color) {
-
-	}
+	handleThemePress(color) {}
 
 	/**
 	 * Render container component
@@ -71,11 +74,12 @@ export class Themes extends Component {
 	render() {
 		return (
 			<ScrollView>
-				<StatusBar translucent={false} barSyle={"default"}/>
+				<StatusBar translucent={false} barSyle={"default"} />
 				{this.createThemeList()}
 			</ScrollView>
-		)
-	}}
+		);
+	}
+}
 
 /**
  * Validates Themes prop types
@@ -111,4 +115,4 @@ function mapDispatchToProps(dispatch) {
  * actions to the store and props of this container to
  * state of store
  */
-export default connect(mapStateToProps, mapDispatchToProps)(Themes)
+export default connect(mapStateToProps, mapDispatchToProps)(Themes);
