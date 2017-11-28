@@ -10,7 +10,7 @@ import initialState from "./initialState";
  * @param {Object} action action object to handle the action
  * @returns {Object} new state of redux store
  */
-export default function appReducer(state = initialState.currencies, action) {
+export default function appReducer(state = initialState.app, action) {
 	switch (action.type) {
 	case types.SWAP_CURRENCY_ACTION:
 		return Object.assign({}, state, {
@@ -19,7 +19,7 @@ export default function appReducer(state = initialState.currencies, action) {
 		});
 	case types.CHANGE_CURRENCY_AMOUNT:
 		return Object.assign({}, state, {
-			amount: action.amount
+			amount: action.amount || 0
 		});
 	default:
 		return state;

@@ -20,12 +20,12 @@ EStyleSheet.build({
 	$darkText: "#343434"
 });
 
+console.log("st", store.getState());
+
 export default () => {
 	return (
 		<Provider store={store}>
-			<AlertProvider>
-				<Navigator />
-			</AlertProvider>
+			<App />
 		</Provider>
 	);
 };

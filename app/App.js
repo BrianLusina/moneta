@@ -7,6 +7,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import * as actions from "./actions/appActions";
 import {
 	Text,
 	View,
@@ -35,7 +36,13 @@ import {
 export class App extends Component {
 	constructor(props, context) {
 		super(props, context);
-		this.state = {};
+		this.state = {
+			base: "USD",
+			quote: "GBP",
+			baseAmount: 0,
+			quoteAmount: 0,
+			date: new Date()
+		};
 
 		this.handlePressBaseCurrency = this.handlePressBaseCurrency.bind(this);
 		this.handlePressQuoteCurrency = this.handlePressQuoteCurrency.bind(this);
@@ -69,7 +76,7 @@ export class App extends Component {
 	 * @param {String} text The text input received from the input
 	 */
 	handleTextChange(text) {
-		console.log("Text", text);
+		this.props.actions.changeAmount(text);
 	}
 
 	/**
@@ -84,13 +91,27 @@ export class App extends Component {
 	 * @function
 	 * Swaps the base and quote currencies
 	 */
-	handleSwapCurrencies() {}
+	handleSwapCurrencies() {
+		console.log(this.props);
+		//console.log(this.props.actions.swapCurrency());
+	}
 
 	/**
 	 * Handles Options/Settings Click
 	 */
 	handleOptionsPress() {
 		this.props.navigation.navigate({ routeName: SETTINGS_SCREEN });
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState(prevState => {
+			return {
+				...prevState,
+				base: nextProps.baseCurrency,
+				quote: nextProps.quoteCurrency,
+				baseAmount: nextProps.amount
+			};
+		});
 	}
 
 	render() {
@@ -104,23 +125,23 @@ export class App extends Component {
 						<Logo />
 
 						<InputWithButton
-							buttonText={"USD"}
+							buttonText={this.state.base}
 							keyboadType="numeric"
 							onChangeText={this.handleTextChange}
-							defaultValue={"45"}
+							defaultValue={this.state.baseAmount}
 							onPress={this.handlePressBaseCurrency}
 						/>
 
 						<InputWithButton
-							buttonText={"GPB"}
+							buttonText={this.state.quote}
 							editable={false}
 							onPress={this.handlePressQuoteCurrency}
-							value={"85"}
+							value={this.state.quoteAmount}
 						/>
 						<LastConvertedText
-							date={new Date()}
-							baseCurrency={"USD"}
-							quoteCurrency={"GPB"}
+							date={this.state.date}
+							baseCurrency={this.state.base}
+							quoteCurrency={this.state.quote}
 							conversionRate={0.789}
 						/>
 						<ReverseCurrenciesButton
@@ -149,7 +170,9 @@ App.propTypes = {
  */
 function mapStateToProps(state, ownProps) {
 	return {
-		state: state
+		baseCurrency: state.app.baseCurrency,
+		quoteCurrency: state.app.quoteCurrency,
+		amount: state.app.amount
 	};
 }
 
@@ -161,7 +184,7 @@ function mapStateToProps(state, ownProps) {
  */
 function mapDispatchToProps(dispatch) {
 	return {
-		// actions: bindActionCreators(actions, dispatch)
+		actions: bindActionCreators(actions, dispatch)
 	};
 }
 

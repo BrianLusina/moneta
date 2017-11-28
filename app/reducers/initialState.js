@@ -8,7 +8,7 @@ export default {
 		isFetching: false,
 		error: {}
 	},
-	currencies: {
+	app: {
 		baseCurrency: "GBP",
 		quoteCurrency: "USD",
 		amount: 100,

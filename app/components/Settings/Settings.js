@@ -102,4 +102,5 @@ Settings.propTypes = {
 	alertWithType: PropTypes.func
 };
 
-export default connectAlert(Settings);
+//export default connectAlert(Settings);
+export default Settings;
