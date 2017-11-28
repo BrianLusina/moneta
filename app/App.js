@@ -89,7 +89,9 @@ export class App extends Component {
 	/**
 	 * Handles Options/Settings Click
 	 */
-	handleOptionsPress() {}
+	handleOptionsPress() {
+		this.props.navigation.navigate({ routeName: SETTINGS_SCREEN });
+	}
 
 	render() {
 		return (

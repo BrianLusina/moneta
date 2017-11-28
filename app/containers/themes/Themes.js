@@ -66,7 +66,9 @@ export class Themes extends Component {
 	 * Handles theme press on an item. This will set the theme of the application when clicked
 	 * @param {String} color The color theme of the list item selected
 	 * */
-	handleThemePress(color) {}
+	handleThemePress(color) {
+		this.props.navigation.goBack();
+	}
 
 	/**
 	 * Render container component
@@ -84,7 +86,9 @@ export class Themes extends Component {
 /**
  * Validates Themes prop types
  */
-Themes.propTypes = {};
+Themes.propTypes = {
+	navigation: PropTypes.object
+};
 
 /**
  * maps the state of the redux store to the Themes props
