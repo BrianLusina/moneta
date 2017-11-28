@@ -7,7 +7,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as actions from "./actions/appActions";
+import * as actions from "./appActions";
 import {
 	Text,
 	View,
@@ -16,14 +16,16 @@ import {
 	KeyboardAvoidingView,
 	TouchableWithoutFeedback
 } from "react-native";
-import styles from "./config/styles";
+import styles from "./styles";
 import Logo from "./components/Logo/Logo";
 import InputWithButton from "./components/TextInput/InputWithButton";
 import ReverseCurrenciesButton from "./components/Buttons/ReverseCurrenciesButton";
 import LastConvertedText from "./components/Text/LastConvertedText";
 import Header from "./components/Header/Header";
-import { CURRENCY_LIST_SCREEN, SETTINGS_SCREEN } from "./navigator/constants";
-import { NavigationActions } from "react-navigation";
+import {
+	CURRENCY_LIST_SCREEN,
+	SETTINGS_SCREEN
+} from "../../navigator/constants";
 
 /**
  * App container component
