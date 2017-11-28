@@ -18,7 +18,7 @@ const ICON_COLOR = "#868686";
 const ICON_SIZE = 23;
 const ICON_PREFIX = Platform.OS === "ios" ? "ios" : "md";
 
-class Settings extends Component {
+export class Settings extends Component {
 	/**
 	 * Handles Theme Press. This will open Theme Settings
 	 * */

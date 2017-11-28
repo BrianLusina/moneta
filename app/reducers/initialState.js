@@ -3,9 +3,21 @@
  * @notes:
  */
 export default {
-	ajax : {
+	ajax: {
 		callsInProgress: 0,
 		isFetching: false,
 		error: {}
+	},
+	currencies: {
+		baseCurrency: "GBP",
+		quoteCurrency: "USD",
+		amount: 100,
+		isFetching: false,
+		conversions: {
+			GBP: {
+				date: "",
+				rates: {}
+			}
+		}
 	}
-}
+};

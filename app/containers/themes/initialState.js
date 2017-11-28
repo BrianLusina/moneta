@@ -5,5 +5,5 @@
  */
 export default {
 	themes: [],
-	currentTheme: ""
+	primaryColor: "#4F6D7A"
 };
