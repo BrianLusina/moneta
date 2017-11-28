@@ -1,10 +1,9 @@
 import React from "react";
-import App from "./App";
 import configureStore from "./store/configureStore";
 import { Provider } from "react-redux";
 import EStyleSheet from "react-native-extended-stylesheet";
-import Navigator from "./config/routes";
 import AlertProvider from "./components/Alerts/AlertProvider";
+import AppNavigator from "./navigator/AppNavigator";
 
 const store = configureStore();
 
@@ -20,12 +19,12 @@ EStyleSheet.build({
 	$darkText: "#343434"
 });
 
-console.log("st", store.getState());
-
 export default () => {
 	return (
 		<Provider store={store}>
-			<App />
+			<AlertProvider>
+				<AppNavigator />
+			</AlertProvider>
 		</Provider>
 	);
 };

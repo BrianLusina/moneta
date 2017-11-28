@@ -14,7 +14,7 @@ import {
 	CURRENCY_LIST_SCREEN,
 	SETTINGS_SCREEN,
 	THEMES_SCREEN
-} from "./navigationRoutes";
+} from "./constants";
 
 /**
  * Home navigation Stack, Will handle navigation in the Home screen

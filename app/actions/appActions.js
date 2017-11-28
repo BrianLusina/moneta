@@ -13,9 +13,8 @@ import {
  */
 export function swapCurrency() {
 	return dispatch => {
-		return () => {
-			dispatch(swapCurrencyAction);
-		};
+		dispatch(swapCurrencyAction());
+		return Promise.resolve();
 	};
 }
 
@@ -27,8 +26,7 @@ export function swapCurrency() {
  */
 export function changeAmount(amount) {
 	return dispatch => {
-		return () => {
-			dispatch(changeCurrencyAmountAction(amount));
-		};
+		dispatch(changeCurrencyAmountAction(amount));
+		return Promise.resolve();
 	};
 }

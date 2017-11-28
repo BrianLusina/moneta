@@ -22,11 +22,8 @@ import InputWithButton from "./components/TextInput/InputWithButton";
 import ReverseCurrenciesButton from "./components/Buttons/ReverseCurrenciesButton";
 import LastConvertedText from "./components/Text/LastConvertedText";
 import Header from "./components/Header/Header";
-import {
-	HOME_SCREEN,
-	CURRENCY_LIST_SCREEN,
-	SETTINGS_SCREEN
-} from "./config/navigationRoutes";
+import { CURRENCY_LIST_SCREEN, SETTINGS_SCREEN } from "./navigator/constants";
+import { NavigationActions } from "react-navigation";
 
 /**
  * App container component
@@ -56,9 +53,11 @@ export class App extends Component {
 	 * This navigates to the Currency list screen
 	 */
 	handlePressBaseCurrency() {
-		this.props.navigation.navigate(CURRENCY_LIST_SCREEN, {
-			title: "Base Currency"
+		this.props.navigation.dispatch({
+			type: CURRENCY_LIST_SCREEN,
+			routeName: "CurrencyList"
 		});
+		// this.props.baseCurrencyScreen();
 	}
 
 	/**
@@ -66,8 +65,9 @@ export class App extends Component {
 	 * This handles presses on the Quote currency and navigates to the currency list screen
 	 */
 	handlePressQuoteCurrency() {
-		this.props.navigation.navigate(CURRENCY_LIST_SCREEN, {
-			title: "Quote Currency"
+		this.props.navigation.dispatch({
+			type: CURRENCY_LIST_SCREEN,
+			routeName: "CurrencyList"
 		});
 	}
 
@@ -92,25 +92,27 @@ export class App extends Component {
 	 * Swaps the base and quote currencies
 	 */
 	handleSwapCurrencies() {
-		console.log(this.props);
-		//console.log(this.props.actions.swapCurrency());
+		this.props.actions.swapCurrency();
 	}
 
 	/**
 	 * Handles Options/Settings Click
 	 */
 	handleOptionsPress() {
-		this.props.navigation.navigate({ routeName: SETTINGS_SCREEN });
+		this.props.navigation.dispatch({ type: SETTINGS_SCREEN });
+		// this.props.navigation.dispatch({
+		// 	type: SETTINGS_SCREEN,
+		// 	routeName: SETTINGS_SCREEN
+		// });
 	}
 
 	componentWillReceiveProps(nextProps) {
 		this.setState(prevState => {
-			return {
-				...prevState,
+			return Object.assign({}, prevState, {
 				base: nextProps.baseCurrency,
 				quote: nextProps.quoteCurrency,
 				baseAmount: nextProps.amount
-			};
+			});
 		});
 	}
 
@@ -128,7 +130,7 @@ export class App extends Component {
 							buttonText={this.state.base}
 							keyboadType="numeric"
 							onChangeText={this.handleTextChange}
-							defaultValue={this.state.baseAmount}
+							defaultValue={this.state.baseAmount.toString()}
 							onPress={this.handlePressBaseCurrency}
 						/>
 
@@ -136,7 +138,7 @@ export class App extends Component {
 							buttonText={this.state.quote}
 							editable={false}
 							onPress={this.handlePressQuoteCurrency}
-							value={this.state.quoteAmount}
+							value={this.state.quoteAmount.toString()}
 						/>
 						<LastConvertedText
 							date={this.state.date}

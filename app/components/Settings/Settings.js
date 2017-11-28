@@ -10,7 +10,7 @@ import { Linking, StatusBar, ScrollView, Platform } from "react-native";
 import ListItem from "../List/ListItem";
 import Separator from "../List/Separator";
 import { Ionicons } from "@expo/vector-icons";
-import { THEMES_SCREEN } from "../../config/navigationRoutes";
+import { THEMES_SCREEN } from "../../navigator/constants";
 import { GITHUB_LINK, FIXER_IO_LINK } from "./constants";
 import connectAlert from "../Alerts/connectAlert";
 
@@ -31,7 +31,13 @@ export class Settings extends Component {
 	 * Opens Fixer.io link
 	 * */
 	handleFixerIoPress() {
-		this._openExternalLink(FIXER_IO_LINK);
+		Linking.openURL(FIXER_IO_LINK).catch(() =>
+			this.props.alertWithType(
+				"error",
+				"Sorry",
+				"Can't open Fixer.io right now"
+			)
+		);
 	}
 
 	/**
@@ -39,16 +45,8 @@ export class Settings extends Component {
 	 * Opens Github link to this project
 	 * */
 	handleGithubLink() {
-		this._openExternalLink(GITHUB_LINK);
-	}
-
-	/**
-	 * Opens External link given a url
-	 * @param {String} url URL to open external link
-	 */
-	_openExternalLink(url) {
-		Linking.openURL(url).catch(() =>
-			this.props.alertWithType("error", "Sorry", "Can't open link right now")
+		Linking.openURL(GITHUB_LINK).catch(() =>
+			this.props.alertWithType("error", "Sorry", "Can't open Github right now")
 		);
 	}
 

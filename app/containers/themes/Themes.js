@@ -29,26 +29,26 @@ export class Themes extends Component {
 	createThemeList() {
 		const themeOptions = [
 			{
-				text: "blue",
+				text: "Blue",
 				color: styles.$blue
 			},
 			{
-				text: "orange",
+				text: "Orange",
 				color: styles.$orange
 			},
 			{
-				text: "green",
+				text: "Green",
 				color: styles.$green
 			},
 			{
-				text: "purple",
+				text: "Purple",
 				color: styles.$purple
 			}
 		];
 
-		return themeOptions.map(theme => {
+		return themeOptions.map((theme, index) => {
 			return (
-				<View>
+				<View key={index}>
 					<ListItem
 						text={theme.text}
 						onClick={() => this.handleThemePress(theme.color)}

@@ -1,6 +1,6 @@
 /**
  * @author lusinabrian on 25/11/17.
- * @notes:
+ * @notes: Initial state of application
  */
 export default {
 	ajax: {
