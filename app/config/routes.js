@@ -1,4 +1,55 @@
 /**
  * @author lusinabrian on 26/11/17.
- * @notes:
+ * @notes: Route configurations in application
+ * This will set the screen navigation routes to use
  */
+import { StackNavigator } from "react-navigation";
+import { StatusBar } from "react-native";
+import CurrencyList from "../containers/currencylist/CurrencyList";
+import App from "../App";
+import {
+	HOME_SCREEN,
+	CURRENCY_LIST_SCREEN,
+	SETTINGS_SCREEN
+} from "./navigationRoutes";
+
+/**
+ * Handles navigation options in Application
+ * @property HOME_SCREEN:
+ * Home Screen of application. The navigtionOptions specifies that this screen has no header
+ *
+ * @property CURRENCY_LIST_SCREEN:
+ * CurrencyList Screen will display a list of currencies
+ * The navigation options will return a function that will get the navigation state to access
+ * the current screen in view. In this case access to the navigation.state.params.title
+ * will allow setting the title of the current navigation screen. This navigation title will
+ * be set from the home screen when either the base or quote currency buttons are clicked
+ *
+ * The second object passed will handle how the stack navigator handles navigations in the app
+ * The mode specifies how the navigation screen being moved to in the application will appear
+ * on the scree, the default mode is to move from right to left on enter and left to righ on exit
+ * the passed in mode is modal to specify that the application navigation will move from bottom to
+ * top like a modal on enter and on exit from top to bottom
+ */
+export default StackNavigator(
+	{
+		HOME_SCREEN: {
+			screen: App,
+			navigationOptions: {
+				header: () => null
+			}
+		},
+		CURRENCY_LIST_SCREEN: {
+			screen: CurrencyList,
+			navigationOptions: ({ navigation }) => ({
+				headerTitle: navigation.state.params.title
+			})
+		}
+	},
+	{
+		mode: "modal",
+		cardStyle: {
+			paddingTop: StatusBar.currentHeight
+		}
+	}
+);

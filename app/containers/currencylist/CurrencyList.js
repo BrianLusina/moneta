@@ -3,11 +3,11 @@
  * @notes:
  */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import {View, StatusBar, Text, FlatList} from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { View, StatusBar, Text, FlatList } from "react-native";
 import currencies from "./data";
 import CurrencyListItem from "../../components/List/ListItem";
 import Separator from "../../components/List/Separator";
@@ -20,30 +20,30 @@ import Separator from "../../components/List/Separator";
 export class CurrencyList extends Component {
 	constructor(props, context) {
 		super(props, context);
-		this.state = {
+		this.state = {};
 
-		};
-
-		this.handleSelectedCurrencyItem = this.handleSelectedCurrencyItem.bind(this);
+		this.handleSelectedCurrencyItem = this.handleSelectedCurrencyItem.bind(
+			this
+		);
 	}
 
 	/**
 	 * Handles selected currency items in flat list
 	 * */
-	handleSelectedCurrencyItem(){
-
+	handleSelectedCurrencyItem() {
+		this.props.navigation.goBack(null);
 	}
 
 	/**
 	 * Creates the render items for the FlatList*/
-	createRenderItems(item){
+	createRenderItems(item) {
 		return (
 			<CurrencyListItem
 				text={item}
 				selected={true}
 				onClick={this.handleSelectedCurrencyItem}
 			/>
-		)
+		);
 	}
 
 	/**
@@ -51,11 +51,11 @@ export class CurrencyList extends Component {
 	 */
 	render() {
 		return (
-			<View style={{flex:1}}>
-				<StatusBar barStyle="default" translucent={false}/>
+			<View style={{ flex: 1 }}>
+				<StatusBar barStyle="default" translucent={false} />
 				<FlatList
 					data={currencies}
-					renderItem={this.createRenderItems({item})}
+					renderItem={this.createRenderItems({ item })}
 					keyExtractor={item => item}
 					itemSeparatorComponent={Separator}
 				/>
@@ -67,7 +67,9 @@ export class CurrencyList extends Component {
 /**
  * Validates CurrencyList prop types
  */
-CurrencyList.propTypes = {};
+CurrencyList.propTypes = {
+	navigation: PropTypes.object
+};
 
 /**
  * maps the state of the redux store to the CurrencyList props
@@ -98,4 +100,4 @@ function mapDispatchToProps(dispatch) {
  * actions to the store and props of this container to
  * state of store
  */
-export default connect(mapStateToProps, mapDispatchToProps)(CurrencyList)
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencyList);

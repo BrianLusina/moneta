@@ -21,6 +21,11 @@ import InputWithButton from "./components/TextInput/InputWithButton";
 import ReverseCurrenciesButton from "./components/Buttons/ReverseCurrenciesButton";
 import LastConvertedText from "./components/Text/LastConvertedText";
 import Header from "./components/Header/Header";
+import {
+	HOME_SCREEN,
+	CURRENCY_LIST_SCREEN,
+	SETTINGS_SCREEN
+} from "./config/navigationRoutes";
 
 /**
  * App container component
@@ -41,17 +46,22 @@ export class App extends Component {
 
 	/**
 	 * Handles press on base currency
+	 * This navigates to the Currency list screen
 	 */
 	handlePressBaseCurrency() {
-		console.log("handle base currency");
+		this.props.navigation.navigate(CURRENCY_LIST_SCREEN, {
+			title: "Base Currency"
+		});
 	}
 
 	/**
 	 * @function handlePressQuoteCurrency
-	 * This handles presses on the Quote currency
+	 * This handles presses on the Quote currency and navigates to the currency list screen
 	 */
 	handlePressQuoteCurrency() {
-		console.log("Handle quote");
+		this.props.navigation.navigate(CURRENCY_LIST_SCREEN, {
+			title: "Quote Currency"
+		});
 	}
 
 	/**
@@ -125,7 +135,9 @@ export class App extends Component {
 /**
  * Validates App prop types
  */
-App.propTypes = {};
+App.propTypes = {
+	navigation: PropTypes.object
+};
 
 /**
  * maps the state of the redux store to the App props
