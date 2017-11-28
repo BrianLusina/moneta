@@ -55,7 +55,7 @@ export class CurrencyList extends Component {
 				<StatusBar barStyle="default" translucent={false} />
 				<FlatList
 					data={currencies}
-					renderItem={this.createRenderItems({ item })}
+					renderItem={({ item }) => this.createRenderItems(item)}
 					keyExtractor={item => item}
 					itemSeparatorComponent={Separator}
 				/>

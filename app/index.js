@@ -1,9 +1,9 @@
 import React from "react";
-import App from "./App";
 import configureStore from "./store/configureStore";
 import { Provider } from "react-redux";
 import EStyleSheet from "react-native-extended-stylesheet";
-import Navigator from "./config/routes";
+import AlertProvider from "./components/Alerts/AlertProvider";
+import AppNavigator from "./navigator/AppNavigator";
 
 const store = configureStore();
 
@@ -22,7 +22,9 @@ EStyleSheet.build({
 export default () => {
 	return (
 		<Provider store={store}>
-			<Navigator />
+			<AlertProvider>
+				<AppNavigator />
+			</AlertProvider>
 		</Provider>
 	);
 };
