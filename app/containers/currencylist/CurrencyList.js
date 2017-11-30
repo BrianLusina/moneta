@@ -3,12 +3,13 @@
  * @notes:
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { View, StatusBar, Text, FlatList } from "react-native";
-import currencies from "./data";
+import {connect} from "react-redux";
+import * as actions from "./actions";
+import { updateConversionRates } from "../../actions/appActions";
+import {bindActionCreators} from "redux";
+import {FlatList, StatusBar, View} from "react-native";
 import CurrencyListItem from "../../components/List/ListItem";
 import Separator from "../../components/List/Separator";
 
@@ -30,7 +31,18 @@ export class CurrencyList extends Component {
 	/**
 	 * Handles selected currency items in flat list
 	 * */
-	handleSelectedCurrencyItem() {
+	handleSelectedCurrencyItem(currency) {
+		const {type} = this.props.navigation.state.params;
+
+		if (type === "base") {
+			//dispatch change base currency
+			this.props.actions.changeBaseCurrency(currency);
+			this.props.updateConversionRates(currency);
+		} else if (type === "quote") {
+			// dispatch change quote currency
+			this.props.actions.changeQuoteCurrency(currency);
+			this.props.updateConversionRates(currency);
+		}
 		this.props.navigation.goBack(null);
 	}
 
@@ -41,7 +53,7 @@ export class CurrencyList extends Component {
 			<CurrencyListItem
 				text={item}
 				selected={true}
-				onClick={this.handleSelectedCurrencyItem}
+				onClick={() => this.handleSelectedCurrencyItem(item)}
 			/>
 		);
 	}
@@ -51,11 +63,11 @@ export class CurrencyList extends Component {
 	 */
 	render() {
 		return (
-			<View style={{ flex: 1 }}>
-				<StatusBar barStyle="default" translucent={false} />
+			<View style={{flex: 1}}>
+				<StatusBar barStyle="default" translucent={false}/>
 				<FlatList
-					data={currencies}
-					renderItem={({ item }) => this.createRenderItems(item)}
+					data={this.props.currencies}
+					renderItem={({item}) => this.createRenderItems(item)}
 					keyExtractor={item => item}
 					itemSeparatorComponent={Separator}
 				/>
@@ -79,7 +91,8 @@ CurrencyList.propTypes = {
  */
 function mapStateToProps(state, ownProps) {
 	return {
-		state: state.currency
+		state: state.currencyList,
+		currencies : state.currencyList.currencies
 	};
 }
 
@@ -91,7 +104,8 @@ function mapStateToProps(state, ownProps) {
  */
 function mapDispatchToProps(dispatch) {
 	return {
-		// actions: bindActionCreators(actions, dispatch)
+		actions: bindActionCreators(actions, dispatch),
+		updateConversionRates : bindActionCreators(updateConversionRates, dispatch)
 	};
 }
 

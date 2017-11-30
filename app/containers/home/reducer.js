@@ -1,5 +1,27 @@
 import * as types from "./actionTypes";
+import {UPDATE_CONVERSION_RATES} from "../../actionTypes/appActionTypes";
 import initialState from "./initialState";
+
+/**
+ * Sets the conversion from the passed in currency
+ * */
+const setConversions = (state, action) => {
+	let conversion = {
+		isLoadingRates: true,
+		date: "",
+		rates: {},
+	};
+
+	if (state.conversions[action.currency]) {
+		conversion = state.conversions[action.currency];
+	}
+
+	return {
+		...state.conversions,
+		[action.currency]: conversion,
+	};
+};
+
 
 /**
  * Reducer that takes in state of redux store and an action object. The action type will be used
@@ -10,7 +32,7 @@ import initialState from "./initialState";
  * @param {Object} action action object to handle the action
  * @returns {Object} new state of redux store
  */
-export default function appReducer(state = initialState, action) {
+export default function reducer(state = initialState, action) {
 	switch (action.type) {
 	case types.SWAP_CURRENCY_ACTION:
 		return Object.assign({}, state, {
@@ -29,6 +51,11 @@ export default function appReducer(state = initialState, action) {
 
 	case types.FETCH_CONVERSION_RATES_SUCCESS:
 		return state;
+
+	case UPDATE_CONVERSION_RATES:
+		return Object.assign({}, state, {
+			conversions: setConversions(state, action)
+		});
 
 	default:
 		return state;

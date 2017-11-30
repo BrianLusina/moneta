@@ -7,7 +7,42 @@ describe("currency reducer ", () => {
 	beforeEach(() => {
 		initialState = {
 			isFetching: false,
-			currencies: [],
+			currentBase: "USD",
+			currentQuote:"GBP",
+			currencies : [
+				"AUD",
+				"BGN",
+				"BRL",
+				"CAD",
+				"CHF",
+				"CNY",
+				"CZK",
+				"DKK",
+				"EUR",
+				"GBP",
+				"HKD",
+				"HRK",
+				"HUF",
+				"IDR",
+				"ILS",
+				"INR",
+				"JPY",
+				"KRW",
+				"MXN",
+				"MYR",
+				"NOK",
+				"NZD",
+				"PHP",
+				"PLN",
+				"RON",
+				"RUB",
+				"SEK",
+				"SGD",
+				"THB",
+				"TRY",
+				"USD",
+				"ZAR",
+			],
 			error: {}
 		}
 	});
@@ -61,7 +96,37 @@ describe("currency reducer ", () => {
 
 		// initial State is untouched
 		expect(initialState.error).toEqual({});
-		expect(initialState.currencies).toEqual([]);
-		expect(initialState.currencies.length).toEqual(0);
 	});
+
+	it("should handle changing base currency action", () => {
+		const baseCurrency = "AZL";
+
+		const action = actions.changeBaseCurrencyAction(baseCurrency);
+
+		// ACT
+		const newState = reducer(initialState, action);
+
+		// ASSERT
+		expect(newState.currentBase).toEqual(baseCurrency);
+
+		// initial State is untouched
+		expect(initialState.currentBase).toEqual("USD");
+	});
+
+	it("should handle changing quote currency", () => {
+		const quoteCurrency = "CAD";
+
+		const action = actions.changeQuoteCurrencyAction(quoteCurrency);
+
+		// ACT
+		const newState = reducer(initialState, action);
+
+		// ASSERT
+		expect(newState.currentQuote).toEqual(quoteCurrency);
+
+		// initial State is untouched
+		expect(initialState.currentQuote).toEqual("GBP");
+	});
+
+
 });

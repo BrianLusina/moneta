@@ -36,6 +36,8 @@ export class Home extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
+			baseCurrency: "",
+			quoteCurrency:"",
 			isFetching: false,
 		};
 
@@ -108,6 +110,8 @@ export class Home extends Component {
 		this.setState(prevState => {
 			return Object.assign({}, prevState, {
 				isFetching: nextProps.isFetching,
+				baseCurrency: nextProps.selectedBaseCurrency || nextProps.baseCurrency,
+				quoteCurrency: nextProps.selectedQuoteCurrency || nextProps.quoteCurrency,
 			});
 		});
 	}
@@ -128,7 +132,7 @@ export class Home extends Component {
 						<Logo />
 
 						<InputWithButton
-							buttonText={this.props.baseCurrency}
+							buttonText={this.state.baseCurrency}
 							keyboadType="numeric"
 							onChangeText={this.handleTextChange}
 							defaultValue={this.props.amount.toString()}
@@ -136,15 +140,15 @@ export class Home extends Component {
 						/>
 
 						<InputWithButton
-							buttonText={this.props.quoteCurrency}
+							buttonText={this.state.quoteCurrency}
 							editable={false}
 							onPress={this.handlePressQuoteCurrency}
 							value={quotePrice}
 						/>
 						<LastConvertedText
 							date={this.props.lastConversionDate}
-							baseCurrency={this.props.baseCurrency}
-							quoteCurrency={this.props.quoteCurrency}
+							baseCurrency={this.state.baseCurrency}
+							quoteCurrency={this.state.quoteCurrency}
 							conversionRate={this.props.conversionRate}
 						/>
 						<ReverseCurrenciesButton
@@ -174,12 +178,17 @@ Home.propTypes = {
 function mapStateToProps(state, ownProps) {
 	const baseCurrency = state.currencies.baseCurrency;
 	const quoteCurrency = state.currencies.quoteCurrency;
+
+	// currently selected quote and base currencies from the currency list object in the redux
+	// store
+	const selectedBaseCurrency = state.currencyList.currentBase;
+	const selectedQuoteCurrency = state.currencyList.currentQuote;
+
 	const conversionSelector = state.currencies.conversions[baseCurrency] || {};
 	const rates = conversionSelector.rates || {};
 
 	return {
-		baseCurrency,
-		quoteCurrency,
+		baseCurrency, quoteCurrency, selectedBaseCurrency, selectedQuoteCurrency,
 		amount: state.currencies.amount,
 		conversionRate : rates[quoteCurrency] || 0,
 		lastConversionDate : conversionSelector.date ? new Date(conversionSelector.date)

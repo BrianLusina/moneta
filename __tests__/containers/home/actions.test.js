@@ -68,7 +68,7 @@ describe("actions", () => {
 
 	it("dispatches changeAmountAction to reducer to update amount in redux store", () => {
 		let amount = 400;
-		const expectedActions = [changeCurrencyAmountAction()];
+		const expectedActions = [changeCurrencyAmountAction(amount)];
 
 		store.dispatch(actions.changeAmount(amount)).then(() => {
 			const storeActions = store.getActions();
