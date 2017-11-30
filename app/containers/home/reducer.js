@@ -1,4 +1,4 @@
-import * as types from "../actionTypes/appActionTypes";
+import * as types from "./actionTypes";
 import initialState from "./initialState";
 
 /**
@@ -10,7 +10,7 @@ import initialState from "./initialState";
  * @param {Object} action action object to handle the action
  * @returns {Object} new state of redux store
  */
-export default function appReducer(state = initialState.app, action) {
+export default function appReducer(state = initialState, action) {
 	switch (action.type) {
 	case types.SWAP_CURRENCY_ACTION:
 		return Object.assign({}, state, {
@@ -21,6 +21,15 @@ export default function appReducer(state = initialState.app, action) {
 		return Object.assign({}, state, {
 			amount: action.amount || 0
 		});
+	case types.FETCH_CONVERSION_RATES_REQUEST:
+		return state;
+
+	case types.FETCH_CONVERSION_RATES_FAILURE:
+		return state;
+
+	case types.FETCH_CONVERSION_RATES_SUCCESS:
+		return state;
+
 	default:
 		return state;
 	}
