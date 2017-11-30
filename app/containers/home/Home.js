@@ -121,7 +121,7 @@ export class Home extends Component {
 						<Logo tintColor={this.props.primaryColor}/>
 
 						<InputWithButton
-							buttonText={this.state.baseCurrency}
+							buttonText={this.props.baseCurrency}
 							keyboadType="numeric"
 							onChangeText={this.handleTextChange}
 							defaultValue={this.props.amount.toString()}
@@ -130,7 +130,7 @@ export class Home extends Component {
 						/>
 
 						<InputWithButton
-							buttonText={this.state.quoteCurrency}
+							buttonText={this.props.quoteCurrency}
 							editable={false}
 							onPress={this.handlePressQuoteCurrency}
 							textColor={this.props.primaryColor}
@@ -138,8 +138,8 @@ export class Home extends Component {
 						/>
 						<LastConvertedText
 							date={this.props.lastConversionDate}
-							baseCurrency={this.state.baseCurrency}
-							quoteCurrency={this.state.quoteCurrency}
+							baseCurrency={this.props.baseCurrency}
+							quoteCurrency={this.props.quoteCurrency}
 							conversionRate={this.props.conversionRate}
 						/>
 						<ReverseCurrenciesButton

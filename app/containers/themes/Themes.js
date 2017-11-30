@@ -3,11 +3,11 @@
  * @notes:
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { ScrollView, StatusBar, View } from "react-native";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {ScrollView, StatusBar, View} from "react-native";
 import ListItem from "../../components/List/ListItem";
 import Separator from "../../components/List/Separator";
 import styles from "./styles";
@@ -22,7 +22,7 @@ export class Themes extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			themes : []
+			themes: []
 		}
 	}
 
@@ -30,17 +30,34 @@ export class Themes extends Component {
 	 * Creates the theme list
 	 * */
 	createThemeList() {
-		return this.state.themes.map((theme, index) => {
+		// const themes = [{
+		// 	name: "Blue",
+		// 	color: styles.$blue,
+		// },
+		// {
+		// 	name: "Orange",
+		// 	color: styles.$green,
+		// },
+		// {
+		// 	name: "Green",
+		// 	color: styles.$orange,
+		// },
+		// {
+		// 	name: "Purple",
+		// 	color: styles.$purple,
+		// }
+		// ];
+		return this.props.themes.map((theme, index) => {
 			return (
 				<View key={index}>
 					<ListItem
 						text={theme.name}
 						onClick={() => this.handleThemePress(theme.color)}
-						selected={false}
+						selected={true}
 						checkMark={false}
 						iconBackground={theme.color}
 					/>
-					<Separator />
+					<Separator/>
 				</View>
 			);
 		});
@@ -55,7 +72,7 @@ export class Themes extends Component {
 		this.props.navigation.goBack();
 	}
 
-	componentWillReceiveProps(nextProps){
+	componentWillReceiveProps(nextProps) {
 		this.setState(prevState => {
 			return Object.assign({}, prevState, {
 				themes: nextProps.themes
@@ -69,7 +86,7 @@ export class Themes extends Component {
 	render() {
 		return (
 			<ScrollView>
-				<StatusBar translucent={false} barSyle={"default"} />
+				<StatusBar translucent={false} barSyle={"default"}/>
 				{this.createThemeList()}
 			</ScrollView>
 		);
@@ -92,7 +109,7 @@ Themes.propTypes = {
 function mapStateToProps(state, ownProps) {
 	return {
 		primaryColor: state.themes.primaryColor,
-		themes : state.themes.themes
+		themes: state.themes.themes
 	};
 }
 

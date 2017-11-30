@@ -60,7 +60,7 @@ export default function reducer(state = initialState, action) {
 		if(currType === "base"){
 			baseCurrency = action.currency
 		} else if(currType === "quote"){
-			quoteCurrency = action.quoteCurrency
+			quoteCurrency = action.currency
 		}
 
 		return Object.assign({}, state, {
