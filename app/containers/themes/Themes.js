@@ -21,36 +21,20 @@ import * as actions from "./actions";
 export class Themes extends Component {
 	constructor(props, context) {
 		super(props, context);
+		this.state = {
+			themes : []
+		}
 	}
 
 	/**
 	 * Creates the theme list
 	 * */
 	createThemeList() {
-		const themeOptions = [
-			{
-				text: "Blue",
-				color: styles.$blue
-			},
-			{
-				text: "Orange",
-				color: styles.$orange
-			},
-			{
-				text: "Green",
-				color: styles.$green
-			},
-			{
-				text: "Purple",
-				color: styles.$purple
-			}
-		];
-
-		return themeOptions.map((theme, index) => {
+		return this.state.themes.map((theme, index) => {
 			return (
 				<View key={index}>
 					<ListItem
-						text={theme.text}
+						text={theme.name}
 						onClick={() => this.handleThemePress(theme.color)}
 						selected={false}
 						checkMark={false}
@@ -67,7 +51,16 @@ export class Themes extends Component {
 	 * @param {String} color The color theme of the list item selected
 	 * */
 	handleThemePress(color) {
+		this.props.actions.changePrimaryColor(color);
 		this.props.navigation.goBack();
+	}
+
+	componentWillReceiveProps(nextProps){
+		this.setState(prevState => {
+			return Object.assign({}, prevState, {
+				themes: nextProps.themes
+			})
+		})
 	}
 
 	/**
@@ -98,7 +91,8 @@ Themes.propTypes = {
  */
 function mapStateToProps(state, ownProps) {
 	return {
-		state: state
+		primaryColor: state.themes.primaryColor,
+		themes : state.themes.themes
 	};
 }
 
