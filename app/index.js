@@ -3,7 +3,7 @@ import configureStore from "./store/configureStore";
 import { Provider } from "react-redux";
 import EStyleSheet from "react-native-extended-stylesheet";
 import AlertProvider from "./components/Alerts/AlertProvider";
-import AppNavigator from "./navigator/AppNavigator";
+import AppNavigator from "./containers/navigator/AppNavigator";
 
 const store = configureStore();
 

@@ -8,7 +8,7 @@ import ajax from "./ajaxReducer";
 import currencyList from "../containers/currencylist/reducer";
 import themes from "../containers/themes/reducer";
 import currencies from "../containers/home/reducer";
-import nav from "../navigator/navReducer";
+import nav from "../containers/navigator/reducer";
 
 /**
  * Combines all reducers for use in the application

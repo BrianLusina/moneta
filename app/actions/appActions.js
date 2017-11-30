@@ -9,10 +9,11 @@ import {
 /**
  * Updates the conversion rates based on the currency selected from the currency list
  * @param {String} currency
+ * @param {String} currType Whether we are updating the base or the quote currency
  * @returns {Function} dispatch function
  * */
-export function updateConversionRates(currency){
+export function updateConversionRates(currency, currType){
 	return dispatch => {
-		dispatch(updateConversionRatesAction(currency))
+		dispatch(updateConversionRatesAction(currency, currType))
 	}
 }

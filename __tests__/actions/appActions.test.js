@@ -39,9 +39,10 @@ describe("currency actions", () => {
 
 	it("dispatches changeBaseCurrencyAction", () => {
 		let currency = "CAD";
-		const expectedActions = [updateConversionRatesAction(currency)];
+		let currType = "quote";
+		const expectedActions = [updateConversionRatesAction(currency, currType)];
 
-		store.dispatch(actions.updateConversionRates(currency));
+		store.dispatch(actions.updateConversionRates(currency, currType));
 		const storeActions = store.getActions();
 
 		// the expected actions from the store are what we expect

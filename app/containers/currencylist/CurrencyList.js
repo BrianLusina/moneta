@@ -22,26 +22,24 @@ export class CurrencyList extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {};
-
-		this.handleSelectedCurrencyItem = this.handleSelectedCurrencyItem.bind(
-			this
-		);
+		this.handleSelectedCurrencyItem = this.handleSelectedCurrencyItem.bind(this);
 	}
 
 	/**
 	 * Handles selected currency items in flat list
 	 * */
 	handleSelectedCurrencyItem(currency) {
+
 		const {type} = this.props.navigation.state.params;
 
 		if (type === "base") {
 			//dispatch change base currency
 			this.props.actions.changeBaseCurrency(currency);
-			this.props.updateConversionRates(currency);
+			this.props.updateConversionRates(currency, type);
 		} else if (type === "quote") {
 			// dispatch change quote currency
 			this.props.actions.changeQuoteCurrency(currency);
-			this.props.updateConversionRates(currency);
+			this.props.updateConversionRates(currency, type);
 		}
 		this.props.navigation.goBack(null);
 	}

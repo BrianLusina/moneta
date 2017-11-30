@@ -15,7 +15,10 @@ import InputWithButton from "../../components/TextInput/InputWithButton";
 import ReverseCurrenciesButton from "../../components/Buttons/ReverseCurrenciesButton";
 import LastConvertedText from "../../components/Text/LastConvertedText";
 import Header from "../../components/Header/Header";
-import {CURRENCY_LIST_SCREEN, SETTINGS_SCREEN} from "../../navigator/constants";
+import {
+	navigateToCurrencyListScreenAction,
+	navigateToSettingsScreenAction,
+} from "../navigator/actionCreators";
 
 /**
  * App container component
@@ -43,11 +46,7 @@ export class Home extends Component {
 	 * This navigates to the Currency list screen
 	 */
 	handlePressBaseCurrency() {
-		this.props.navigation.dispatch({
-			type: CURRENCY_LIST_SCREEN,
-			routeName: "CurrencyList"
-		});
-		// this.props.baseCurrencyScreen();
+		this.props.navigation.dispatch(navigateToCurrencyListScreenAction("Base Currency"));
 	}
 
 	/**
@@ -55,10 +54,7 @@ export class Home extends Component {
 	 * This handles presses on the Quote currency and navigates to the currency list screen
 	 */
 	handlePressQuoteCurrency() {
-		this.props.navigation.dispatch({
-			type: CURRENCY_LIST_SCREEN,
-			routeName: "CurrencyList"
-		});
+		this.props.navigation.dispatch(navigateToCurrencyListScreenAction("Quote Currency"));
 	}
 
 	/**
@@ -89,19 +85,15 @@ export class Home extends Component {
 	 * Handles Options/Settings Click
 	 */
 	handleOptionsPress() {
-		this.props.navigation.dispatch({type: SETTINGS_SCREEN});
-		// this.props.navigation.dispatch({
-		// 	type: SETTINGS_SCREEN,
-		// 	routeName: SETTINGS_SCREEN
-		// });
+		this.props.navigation.dispatch(navigateToSettingsScreenAction());
 	}
 
 	componentWillReceiveProps(nextProps) {
 		this.setState(prevState => {
 			return Object.assign({}, prevState, {
 				isFetching: nextProps.isFetching,
-				baseCurrency: nextProps.selectedBaseCurrency || nextProps.baseCurrency,
-				quoteCurrency: nextProps.selectedQuoteCurrency || nextProps.quoteCurrency,
+				baseCurrency: nextProps.baseCurrency,
+				quoteCurrency: nextProps.quoteCurrency,
 			});
 		});
 	}
@@ -178,16 +170,11 @@ function mapStateToProps(state, ownProps) {
 	const baseCurrency = state.currencies.baseCurrency;
 	const quoteCurrency = state.currencies.quoteCurrency;
 
-	// currently selected quote and base currencies from the currency list object in the redux
-	// store
-	const selectedBaseCurrency = state.currencyList.currentBase;
-	const selectedQuoteCurrency = state.currencyList.currentQuote;
-
 	const conversionSelector = state.currencies.conversions[baseCurrency] || {};
 	const rates = conversionSelector.rates || {};
 
 	return {
-		baseCurrency, quoteCurrency, selectedBaseCurrency, selectedQuoteCurrency,
+		baseCurrency, quoteCurrency,
 		amount: state.currencies.amount,
 		conversionRate: rates[quoteCurrency] || 0,
 		lastConversionDate: conversionSelector.date ? new Date(conversionSelector.date)

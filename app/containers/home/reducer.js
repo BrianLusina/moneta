@@ -53,7 +53,18 @@ export default function reducer(state = initialState, action) {
 		return state;
 
 	case UPDATE_CONVERSION_RATES:
+		let currType = action.currType;
+		let baseCurrency = state.baseCurrency;
+		let quoteCurrency = state.quoteCurrency;
+
+		if(currType === "base"){
+			baseCurrency = action.currency
+		} else if(currType === "quote"){
+			quoteCurrency = action.quoteCurrency
+		}
+
 		return Object.assign({}, state, {
+			baseCurrency, quoteCurrency,
 			conversions: setConversions(state, action)
 		});
 

@@ -10,12 +10,13 @@ describe("appActionCreator ", function () {
 
 	it("should create a update conversion rates action", function () {
 		const currency = "CAD";
+		const currType = "base";
 		const expectedAction = {
 			type: types.UPDATE_CONVERSION_RATES,
-			currency
+			currency, currType
 		};
 
-		const action = actions.updateConversionRatesAction(currency);
+		const action = actions.updateConversionRatesAction(currency, currType);
 
 		expect(action).toEqual(expectedAction);
 	});

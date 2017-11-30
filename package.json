@@ -49,7 +49,8 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!react|@expo|expo)"
+      "node_modules/(?!react|@expo|expo)",
+      "node_modules/(?!(jest-)?react-native|react-navigation)"
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"

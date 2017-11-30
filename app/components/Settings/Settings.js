@@ -10,7 +10,7 @@ import { Linking, StatusBar, ScrollView, Platform } from "react-native";
 import ListItem from "../List/ListItem";
 import Separator from "../List/Separator";
 import { Ionicons } from "@expo/vector-icons";
-import { THEMES_SCREEN } from "../../navigator/constants";
+import { navigateToThemesScreenAction } from "../../containers/navigator/actionCreators";
 import { GITHUB_LINK, FIXER_IO_LINK } from "./constants";
 import connectAlert from "../Alerts/connectAlert";
 
@@ -18,82 +18,82 @@ const ICON_COLOR = "#868686";
 const ICON_SIZE = 23;
 const ICON_PREFIX = Platform.OS === "ios" ? "ios" : "md";
 
-export class Settings extends Component {
+const Settings = ({ navigation, alertWithType }) => {
+
 	/**
 	 * Handles Theme Press. This will open Theme Settings
 	 * */
-	handleThemesPress() {
-		this.props.navigation.navigate(THEMES_SCREEN);
-	}
+	const handleThemesPress =() => {
+		//navigation.dispatch(navigateToThemesScreenAction());
+		navigation.navigate("Themes")
+	};
 
 	/**
 	 * Event handler that handles Fixer.io click event for opening Fixer.io
 	 * Opens Fixer.io link
 	 * */
-	handleFixerIoPress() {
+	const handleFixerIoPress = () => {
 		Linking.openURL(FIXER_IO_LINK).catch(() =>
-			this.props.alertWithType(
+			alertWithType(
 				"error",
 				"Sorry",
 				"Can't open Fixer.io right now"
 			)
 		);
-	}
+	};
 
 	/**
 	 * Handles Github link click event
 	 * Opens Github link to this project
 	 * */
-	handleGithubLink() {
+	const handleGithubLink = () => {
 		Linking.openURL(GITHUB_LINK).catch(() =>
-			this.props.alertWithType("error", "Sorry", "Can't open Github right now")
+			alertWithType("error", "Sorry", "Can't open Github right now")
 		);
-	}
+	};
 
-	render() {
-		return (
-			<ScrollView>
-				<StatusBar translucent={false} barStyle={"default"} />
-				<ListItem
-					text={"Themes"}
-					onClick={this.handleThemesPress}
-					customIcon={
-						<Ionicons
-							name={`${ICON_PREFIX}-arrow-forward`}
-							color={ICON_COLOR}
-							size={ICON_SIZE}
-						/>
-					}
-				/>
-				<Separator />
-				<ListItem
-					text={"Fixer.io"}
-					onClick={this.handleFixerIoPress}
-					customIcon={
-						<Ionicons
-							name={`${ICON_PREFIX}-link`}
-							color={ICON_COLOR}
-							size={ICON_SIZE}
-						/>
-					}
-				/>
-				<Separator />
-				<ListItem
-					text={"Github"}
-					onClick={this.handleGithubLink}
-					customIcon={
-						<Ionicons
-							name={`${ICON_PREFIX}-link`}
-							color={ICON_COLOR}
-							size={ICON_SIZE}
-						/>
-					}
-				/>
-				<Separator />
-			</ScrollView>
-		);
-	}
-}
+	return (
+		<ScrollView>
+			<StatusBar translucent={false} barStyle={"default"} />
+			<ListItem
+				text={"Themes"}
+				onClick={handleThemesPress}
+				customIcon={
+					<Ionicons
+						name={`${ICON_PREFIX}-arrow-forward`}
+						color={ICON_COLOR}
+						size={ICON_SIZE}
+					/>
+				}
+			/>
+			<Separator />
+			<ListItem
+				text={"Fixer.io"}
+				onClick={handleFixerIoPress}
+				customIcon={
+					<Ionicons
+						name={`${ICON_PREFIX}-link`}
+						color={ICON_COLOR}
+						size={ICON_SIZE}
+					/>
+				}
+			/>
+			<Separator />
+			<ListItem
+				text={"Github"}
+				onClick={handleGithubLink}
+				customIcon={
+					<Ionicons
+						name={`${ICON_PREFIX}-link`}
+						color={ICON_COLOR}
+						size={ICON_SIZE}
+					/>
+				}
+			/>
+			<Separator />
+		</ScrollView>
+	);
+};
 
 Settings.propTypes = {
 	navigation: PropTypes.object,
