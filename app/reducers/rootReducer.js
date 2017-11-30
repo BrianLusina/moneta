@@ -5,19 +5,20 @@
 
 import { combineReducers } from "redux";
 import ajax from "./ajaxReducer";
-import currency from "../containers/currencylist/reducer";
+import currencyList from "../containers/currencylist/reducer";
 import themes from "../containers/themes/reducer";
-import app from "./appReducer";
+import currencies from "../containers/home/reducer";
 import nav from "../navigator/navReducer";
+
 /**
  * Combines all reducers for use in the application
  * Uses short hand property names from ES6
  * */
 const rootReducer = combineReducers({
 	ajax,
-	currency,
+	currencies,
 	themes,
-	app,
+	currencyList,
 	nav
 });
 

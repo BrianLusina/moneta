@@ -1,10 +1,10 @@
 import expect from "expect";
-import * as actions from "../../app/actions/appActions";
-import * as types from "../../app/actionTypes/appActionTypes";
+import * as actions from "../../../app/containers/home/actions";
+import * as types from "../../../app/containers/home/actionTypes";
 import {
 	changeCurrencyAmountAction,
 	swapCurrencyAction
-} from "../../app/actionCreators/appActionCreator";
+} from "../../../app/containers/home/actionCreators";
 import thunk from "redux-thunk";
 import nock from "nock";
 import configureMockStore from "redux-mock-store";
@@ -14,7 +14,7 @@ import sinon from "sinon";
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
-describe("appActions", () => {
+describe("actions", () => {
 	let sandbox;
 	let store;
 	let initialState = {

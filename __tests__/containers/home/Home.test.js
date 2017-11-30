@@ -1,11 +1,11 @@
 import React from "react";
-import { App } from "../../containers/Home/App";
+import { Home } from "../../../app/containers/home/Home";
 
 import renderer from "react-test-renderer";
 
-describe("App should", () => {
+describe("Home should", () => {
 	xit("render without crashing", () => {
-		const rendered = renderer.create(<App />).toJSON();
+		const rendered = renderer.create(<Home />).toJSON();
 		expect(rendered).toBeTruthy();
 	});
 });

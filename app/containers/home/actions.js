@@ -4,7 +4,7 @@
 import {
 	changeCurrencyAmountAction,
 	swapCurrencyAction
-} from "../actionCreators/appActionCreator";
+} from "./actionCreators";
 
 /**
  * Swap currency action that handles swapping the currency of the base and quote currencies

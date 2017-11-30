@@ -6,15 +6,10 @@
 import { StackNavigator } from "react-navigation";
 import { StatusBar } from "react-native";
 import CurrencyList from "../containers/currencylist/CurrencyList";
-import App from "../App";
+import Home from "../containers/home/Home";
 import Settings from "../components/Settings/Settings";
 import Themes from "../containers/themes/Themes";
-import {
-	HOME_SCREEN,
-	CURRENCY_LIST_SCREEN,
-	SETTINGS_SCREEN,
-	THEMES_SCREEN
-} from "./constants";
+
 
 /**
  * Home navigation Stack, Will handle navigation in the Home screen
@@ -23,19 +18,19 @@ import {
  */
 const HomeNavigation = StackNavigator(
 	{
-		HOME_SCREEN: {
-			screen: App,
+		Home: {
+			screen: Home,
 			navigationOptions: {
 				header: () => null
 			}
 		},
-		SETTINGS_SCREEN: {
+		Settings: {
 			screen: Settings,
 			navigationOptions: {
 				headerTitle: "Settings"
 			}
 		},
-		THEMES_SCREEN: {
+		Themes: {
 			screen: Themes,
 			navigationOptions: {
 				headerTitle: "Themes"
@@ -79,10 +74,10 @@ const CurrencyListNavigation = StackNavigator({
  */
 export default StackNavigator(
 	{
-		HOME_SCREEN: {
+		Home: {
 			screen: HomeNavigation
 		},
-		CURRENCY_LIST_SCREEN: {
+		CurrencyList: {
 			screen: CurrencyListNavigation
 		}
 	},

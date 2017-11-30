@@ -3,7 +3,6 @@ import { createStore } from "redux";
 import rootReducer from "../../app/reducers/rootReducer";
 import initialState from "../../app/reducers/initialState";
 import * as ajaxActions from "../../app/actionCreators/ajaxActionCreator";
-import * as appActions from "../../app/actionCreators/appActionCreator";
 
 describe("Redux store", function() {
 	it("should handle given action", function() {

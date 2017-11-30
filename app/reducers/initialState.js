@@ -8,16 +8,4 @@ export default {
 		isFetching: false,
 		error: {}
 	},
-	app: {
-		baseCurrency: "GBP",
-		quoteCurrency: "USD",
-		amount: 100,
-		isFetching: false,
-		conversions: {
-			GBP: {
-				date: "",
-				rates: {}
-			}
-		}
-	}
 };

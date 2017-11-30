@@ -7,7 +7,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as actions from "./appActions";
+import * as actions from "./actions";
 import {
 	Text,
 	View,
@@ -17,11 +17,11 @@ import {
 	TouchableWithoutFeedback
 } from "react-native";
 import styles from "./styles";
-import Logo from "./components/Logo/Logo";
-import InputWithButton from "./components/TextInput/InputWithButton";
-import ReverseCurrenciesButton from "./components/Buttons/ReverseCurrenciesButton";
-import LastConvertedText from "./components/Text/LastConvertedText";
-import Header from "./components/Header/Header";
+import Logo from "../../components/Logo/Logo";
+import InputWithButton from "../../components/TextInput/InputWithButton";
+import ReverseCurrenciesButton from "../../components/Buttons/ReverseCurrenciesButton";
+import LastConvertedText from "../../components/Text/LastConvertedText";
+import Header from "../../components/Header/Header";
 import {
 	CURRENCY_LIST_SCREEN,
 	SETTINGS_SCREEN
@@ -32,15 +32,11 @@ import {
  * export keyword here is used to import this module as a named import
  * useful when running tests
  */
-export class App extends Component {
+export class Home extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			base: "USD",
-			quote: "GBP",
-			baseAmount: 0,
-			quoteAmount: 0,
-			date: new Date()
+			isFetching: false,
 		};
 
 		this.handlePressBaseCurrency = this.handlePressBaseCurrency.bind(this);
@@ -111,14 +107,17 @@ export class App extends Component {
 	componentWillReceiveProps(nextProps) {
 		this.setState(prevState => {
 			return Object.assign({}, prevState, {
-				base: nextProps.baseCurrency,
-				quote: nextProps.quoteCurrency,
-				baseAmount: nextProps.amount
+				isFetching: nextProps.isFetching,
 			});
 		});
 	}
 
 	render() {
+		let quotePrice = "...";
+		if (!this.props.isLoadingRates) {
+			quotePrice = (this.props.amount * this.props.conversionRate).toFixed(2);
+		}
+
 		return (
 			<TouchableWithoutFeedback onPress={this.handleTouchableWithoutFeedback}>
 				<View style={styles.container}>
@@ -129,24 +128,24 @@ export class App extends Component {
 						<Logo />
 
 						<InputWithButton
-							buttonText={this.state.base}
+							buttonText={this.props.baseCurrency}
 							keyboadType="numeric"
 							onChangeText={this.handleTextChange}
-							defaultValue={this.state.baseAmount.toString()}
+							defaultValue={this.props.amount.toString()}
 							onPress={this.handlePressBaseCurrency}
 						/>
 
 						<InputWithButton
-							buttonText={this.state.quote}
+							buttonText={this.props.quoteCurrency}
 							editable={false}
 							onPress={this.handlePressQuoteCurrency}
-							value={this.state.quoteAmount.toString()}
+							value={quotePrice}
 						/>
 						<LastConvertedText
-							date={this.state.date}
-							baseCurrency={this.state.base}
-							quoteCurrency={this.state.quote}
-							conversionRate={0.789}
+							date={this.props.lastConversionDate}
+							baseCurrency={this.props.baseCurrency}
+							quoteCurrency={this.props.quoteCurrency}
+							conversionRate={this.props.conversionRate}
 						/>
 						<ReverseCurrenciesButton
 							onClick={this.handleSwapCurrencies}
@@ -162,7 +161,7 @@ export class App extends Component {
 /**
  * Validates App prop types
  */
-App.propTypes = {
+Home.propTypes = {
 	navigation: PropTypes.object
 };
 
@@ -173,10 +172,20 @@ App.propTypes = {
  * @returns {Object} new state of redux store
  */
 function mapStateToProps(state, ownProps) {
+	const baseCurrency = state.currencies.baseCurrency;
+	const quoteCurrency = state.currencies.quoteCurrency;
+	const conversionSelector = state.currencies.conversions[baseCurrency] || {};
+	const rates = conversionSelector.rates || {};
+
 	return {
-		baseCurrency: state.app.baseCurrency,
-		quoteCurrency: state.app.quoteCurrency,
-		amount: state.app.amount
+		baseCurrency,
+		quoteCurrency,
+		amount: state.currencies.amount,
+		conversionRate : rates[quoteCurrency] || 0,
+		lastConversionDate : conversionSelector.date ? new Date(conversionSelector.date)
+			: new Date(),
+		isFetching : state.currencies.isFetching,
+		isLoadingRates: conversionSelector.isLoadingRates,
 	};
 }
 
@@ -197,4 +206,4 @@ function mapDispatchToProps(dispatch) {
  * actions to the store and props of this container to
  * state of store
  */
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
