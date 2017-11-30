@@ -49,10 +49,17 @@ export class CurrencyList extends Component {
 	/**
 	 * Creates the render items for the FlatList*/
 	createRenderItems(item) {
+		// check for the comparison currency and update the selection based on the selected
+		// currency and also check if we are updating the quote currency
+		let comparisonCurrency = this.props.currentBase;
+		if(this.props.navigation.state.params.type === "quote"){
+			comparisonCurrency = this.props.currentQuote;
+		}
+
 		return (
 			<CurrencyListItem
 				text={item}
-				selected={true}
+				selected={item === comparisonCurrency}
 				onClick={() => this.handleSelectedCurrencyItem(item)}
 			/>
 		);
@@ -91,8 +98,9 @@ CurrencyList.propTypes = {
  */
 function mapStateToProps(state, ownProps) {
 	return {
-		state: state.currencyList,
-		currencies : state.currencyList.currencies
+		currencies : state.currencyList.currencies,
+		currentBase: state.currencyList.currentBase,
+		currentQuote:state.currencyList.currentQuote,
 	};
 }
 
