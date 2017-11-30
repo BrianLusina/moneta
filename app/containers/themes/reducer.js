@@ -20,8 +20,6 @@ import initialState from "./initialState";
  */
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-	case types.FETCH_CURRENT_THEME:
-		return Object.assign({}, state, {});
 	case types.CHANGE_PRIMARY_COLOR:
 		return {
 			...state,

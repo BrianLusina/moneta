@@ -3,29 +3,19 @@
  * @notes: App container component
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import * as actions from "./actions";
-import {
-	Text,
-	View,
-	StatusBar,
-	Keyboard,
-	KeyboardAvoidingView,
-	TouchableWithoutFeedback
-} from "react-native";
+import {Keyboard, KeyboardAvoidingView, StatusBar, TouchableWithoutFeedback, View} from "react-native";
 import styles from "./styles";
 import Logo from "../../components/Logo/Logo";
 import InputWithButton from "../../components/TextInput/InputWithButton";
 import ReverseCurrenciesButton from "../../components/Buttons/ReverseCurrenciesButton";
 import LastConvertedText from "../../components/Text/LastConvertedText";
 import Header from "../../components/Header/Header";
-import {
-	CURRENCY_LIST_SCREEN,
-	SETTINGS_SCREEN
-} from "../../navigator/constants";
+import {CURRENCY_LIST_SCREEN, SETTINGS_SCREEN} from "../../navigator/constants";
 
 /**
  * App container component
@@ -37,7 +27,7 @@ export class Home extends Component {
 		super(props, context);
 		this.state = {
 			baseCurrency: "",
-			quoteCurrency:"",
+			quoteCurrency: "",
 			isFetching: false,
 		};
 
@@ -99,7 +89,7 @@ export class Home extends Component {
 	 * Handles Options/Settings Click
 	 */
 	handleOptionsPress() {
-		this.props.navigation.dispatch({ type: SETTINGS_SCREEN });
+		this.props.navigation.dispatch({type: SETTINGS_SCREEN});
 		// this.props.navigation.dispatch({
 		// 	type: SETTINGS_SCREEN,
 		// 	routeName: SETTINGS_SCREEN
@@ -121,15 +111,22 @@ export class Home extends Component {
 		if (!this.props.isLoadingRates) {
 			quotePrice = (this.props.amount * this.props.conversionRate).toFixed(2);
 		}
+		const containerStyles = [styles.container];
+
+		let backgroundColor = this.props.primaryColor;
+
+		if (backgroundColor) {
+			containerStyles.push({backgroundColor});
+		}
 
 		return (
 			<TouchableWithoutFeedback onPress={this.handleTouchableWithoutFeedback}>
-				<View style={styles.container}>
-					<StatusBar translucent={false} barStyle="light-content" />
-					<Header onClick={this.handleOptionsPress} />
+				<View style={containerStyles}>
+					<StatusBar translucent={false} barStyle="light-content"/>
+					<Header onClick={this.handleOptionsPress}/>
 
 					<KeyboardAvoidingView behavior="padding">
-						<Logo />
+						<Logo tintColor={this.props.primaryColor}/>
 
 						<InputWithButton
 							buttonText={this.state.baseCurrency}
@@ -137,12 +134,14 @@ export class Home extends Component {
 							onChangeText={this.handleTextChange}
 							defaultValue={this.props.amount.toString()}
 							onPress={this.handlePressBaseCurrency}
+							textColor={this.props.primaryColor}
 						/>
 
 						<InputWithButton
 							buttonText={this.state.quoteCurrency}
 							editable={false}
 							onPress={this.handlePressQuoteCurrency}
+							textColor={this.props.primaryColor}
 							value={quotePrice}
 						/>
 						<LastConvertedText
@@ -190,11 +189,12 @@ function mapStateToProps(state, ownProps) {
 	return {
 		baseCurrency, quoteCurrency, selectedBaseCurrency, selectedQuoteCurrency,
 		amount: state.currencies.amount,
-		conversionRate : rates[quoteCurrency] || 0,
-		lastConversionDate : conversionSelector.date ? new Date(conversionSelector.date)
+		conversionRate: rates[quoteCurrency] || 0,
+		lastConversionDate: conversionSelector.date ? new Date(conversionSelector.date)
 			: new Date(),
-		isFetching : state.currencies.isFetching,
+		isFetching: state.currencies.isFetching,
 		isLoadingRates: conversionSelector.isLoadingRates,
+		primaryColor: state.themes.primaryColor
 	};
 }
 

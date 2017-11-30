@@ -61,6 +61,7 @@ export class CurrencyList extends Component {
 				text={item}
 				selected={item === comparisonCurrency}
 				onClick={() => this.handleSelectedCurrencyItem(item)}
+				iconBackground={this.props.primaryColor}
 			/>
 		);
 	}
@@ -101,6 +102,7 @@ function mapStateToProps(state, ownProps) {
 		currencies : state.currencyList.currencies,
 		currentBase: state.currencyList.currentBase,
 		currentQuote:state.currencyList.currentQuote,
+		primaryColor: state.themes.primaryColor,
 	};
 }
 
