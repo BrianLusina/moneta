@@ -21,7 +21,7 @@ export function fetchCurrencyListRequestAction() {
  * @return {Object} Object with Type of action and error object
  * */
 export function fetchCurrencyListFailureAction(error) {
-	return {type: types.FETCH_CURRENTY_LIST_FAILURE, error};
+	return {type: types.FETCH_CURRENCY_LIST_FAILURE, error};
 }
 
 /**
@@ -31,5 +31,26 @@ export function fetchCurrencyListFailureAction(error) {
  * @return {Object} Object with Type of action and payload object
  * */
 export function fetchCurrencyListSuccessAction(payload) {
-	return {type: types.FETCH_CURRENTY_LIST_SUCCESS, payload};
+	return {type: types.FETCH_CURRENCY_LIST_SUCCESS, payload};
+}
+
+/**
+ * Action to change the base currency from the selected currencies that pop up on the screen
+ * @param {String} baseCurrency New currency to change to
+ * @returns {Object} Object with type of action for reducer to resolve and the currency to set as
+ * new base currency
+ * */
+export function changeBaseCurrencyAction (baseCurrency){
+	return {type: types.CHANGE_BASE_CURRENCY, baseCurrency}
+}
+
+/**
+ * Changes the quote currency by passing the newly selected currency to the redux store
+ * This will pass a type of action [Change quote currency action] to the store along with the quote
+ * currency to change to
+ * @param {String} quoteCurrency. The newly selected quote currency item
+ * @returns {Object} type of action and the quote currency
+ * */
+export function changeQuoteCurrencyAction(quoteCurrency){
+	return {type: types.CHANGE_QUOTE_CURRENCY, quoteCurrency}
 }

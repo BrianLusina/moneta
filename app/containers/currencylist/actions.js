@@ -4,7 +4,8 @@
  * actions to the redux reducer for updating the state of the store
  */
 import {
-	fetchCurrencyListSuccessAction, fetchCurrencyListFailureAction, fetchCurrencyListRequestAction
+	fetchCurrencyListSuccessAction, fetchCurrencyListFailureAction, fetchCurrencyListRequestAction,
+	changeQuoteCurrencyAction, changeBaseCurrencyAction
 } from "./actionCreator";
 import {
 	ajaxCallFailureAction, ajaxCallBeginAction, ajaxCallSuccess
@@ -32,3 +33,28 @@ export function fetchCurrencies() {
 			})
 	}
 }
+
+/**
+ * Action to change the base currency
+ * Dispatches an action for the reducer to update the redux store. Will be passed in with the
+ * base currency
+ * @param {String} baseCurrency
+ * @returns {Function} dispatch function
+ * */
+export function changeBaseCurrency(baseCurrency){
+	return dispatch => {
+		dispatch(changeBaseCurrencyAction(baseCurrency))
+	}
+}
+
+/**
+ * Action to change the quote currency
+ * This returns a dispatch action that is handled by redux-thunk
+ * @param {String} quoteCurrency the selected quote currency
+ * @returns {Function} dispatch function
+ * */
+export const changeQuoteCurrency = quoteCurrency => {
+	return dispatch => {
+		dispatch(changeQuoteCurrencyAction(quoteCurrency))
+	}
+};
