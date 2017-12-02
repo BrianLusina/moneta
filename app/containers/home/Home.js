@@ -19,6 +19,7 @@ import {
 	navigateToCurrencyListScreenAction,
 	navigateToSettingsScreenAction,
 } from "../navigator/actionCreators";
+import connectAlert from "../../components/Alerts/connectAlert";
 
 /**
  * App container component
@@ -219,4 +220,4 @@ function mapDispatchToProps(dispatch) {
  * actions to the store and props of this container to
  * state of store
  */
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(connectAlert(Home));

@@ -15,7 +15,7 @@ import color from "color";
  *  4. textColor Primary color
  */
 const InputWithButton = props => {
-	const { onPress, buttonText, editable = true, textColor} = props;
+	const { onPress, buttonText, editable = true, textColor, keyboardType} = props;
 
 	// get the container styles and set them to an array, if the text input is editable. Then
 	// add the containerDisabled property
@@ -38,8 +38,7 @@ const InputWithButton = props => {
 			<TouchableHighlight
 				underlayColor={underlayColor}
 				style={styles.buttonContainer}
-				onPress={onPress}
-			>
+				onPress={onPress}>
 				<Text style={buttonTextStyles}>{buttonText}</Text>
 			</TouchableHighlight>
 			<View style={styles.border} />
@@ -47,6 +46,7 @@ const InputWithButton = props => {
 				style={styles.input}
 				editable={editable}
 				underlineColorAndroid="transparent"
+				keyboardType={keyboardType}
 				{...props}
 			/>
 		</View>
@@ -60,6 +60,7 @@ InputWithButton.propTypes = {
 	onPress: PropTypes.func.isRequired,
 	buttonText: PropTypes.string.isRequired,
 	textColor:PropTypes.string,
+	keyboardType: PropTypes.string,
 	editable: PropTypes.bool
 };
 
