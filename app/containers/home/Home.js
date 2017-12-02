@@ -19,6 +19,7 @@ import {
 	navigateToCurrencyListScreenAction,
 	navigateToSettingsScreenAction,
 } from "../navigator/actionCreators";
+import connectAlert from "../../components/Alerts/connectAlert";
 
 /**
  * App container component
@@ -79,6 +80,7 @@ export class Home extends Component {
 	 */
 	handleSwapCurrencies() {
 		this.props.actions.swapCurrency();
+		//this.props.actions.fetchLatestBaseConversionRates(this.props.baseCurrency)
 	}
 
 	/**
@@ -86,6 +88,22 @@ export class Home extends Component {
 	 */
 	handleOptionsPress() {
 		this.props.navigation.dispatch(navigateToSettingsScreenAction());
+	}
+
+	componentDidMount(){
+		this.props.actions.fetchLatestBaseConversionRates(this.props.baseCurrency)
+	}
+
+	/**
+	 * After the component has updated we check whether the previous props and the current props
+	 * are the same and then make a network call
+	 * @param {Object} prevProps Previous Props before an update was made
+	 * @param {Object} prevState Previous state before an update was made to the component
+	 * */
+	componentDidUpdate(prevProps, prevState){
+		if(prevProps.baseCurrency !== this.props.baseCurrency){
+			this.props.actions.fetchLatestBaseConversionRates(this.props.baseCurrency)
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -202,4 +220,4 @@ function mapDispatchToProps(dispatch) {
  * actions to the store and props of this container to
  * state of store
  */
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(connectAlert(Home));

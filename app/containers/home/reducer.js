@@ -44,22 +44,37 @@ export default function reducer(state = initialState, action) {
 			amount: action.amount || 0
 		});
 	case types.FETCH_CONVERSION_RATES_REQUEST:
-		return state;
+		return Object.assign({}, state, {
+			isFetching: true
+		});
 
 	case types.FETCH_CONVERSION_RATES_FAILURE:
-		return state;
+		return Object.assign({}, state, {
+			isFetching: false,
+			error: action.error
+		});
 
 	case types.FETCH_CONVERSION_RATES_SUCCESS:
-		return state;
+		return Object.assign({}, state, {
+			isFetching: false,
+			baseCurrency: action.payload.base,
+			conversions: {
+				...state.conversions,
+				[action.payload.base]: {
+					isLoadingRates: false,
+					...action.payload
+				}
+			}
+		});
 
 	case UPDATE_CONVERSION_RATES:
 		let currType = action.currType;
 		let baseCurrency = state.baseCurrency;
 		let quoteCurrency = state.quoteCurrency;
 
-		if(currType === "base"){
+		if (currType === "base") {
 			baseCurrency = action.currency
-		} else if(currType === "quote"){
+		} else if (currType === "quote") {
 			quoteCurrency = action.currency
 		}
 
