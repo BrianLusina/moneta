@@ -1,8 +1,9 @@
 import expect from "expect";
 import * as actions from "../../../app/containers/home/actions";
-import * as types from "../../../app/containers/home/actionTypes";
 import {
 	changeCurrencyAmountAction,
+	fetchConversionRatesRequestAction,
+	fetchConversionRatesSuccessAction,
 	swapCurrencyAction
 } from "../../../app/containers/home/actionCreators";
 import thunk from "redux-thunk";
@@ -10,6 +11,7 @@ import nock from "nock";
 import configureMockStore from "redux-mock-store";
 import axios from "axios";
 import sinon from "sinon";
+import {ajaxCallBeginAction, ajaxCallSuccess} from "../../../app/actionCreators/ajaxActionCreator";
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
@@ -49,6 +51,28 @@ describe("actions", () => {
 		sandbox.restore();
 		nock.cleanAll();
 		store = mockStore(initialState);
+	});
+
+	it("dispatches fetchActions to get currency data for the base currency", (done) => {
+		const baseCurrency = "USD";
+		const payload = {};
+
+		const expectedActions = [
+			ajaxCallBeginAction(), fetchConversionRatesRequestAction(),
+			ajaxCallSuccess(), fetchConversionRatesSuccessAction(payload)
+		];
+
+		const resolved = new Promise((resolve, reject) => resolve({
+			data: payload
+		}));
+
+		sandbox.stub(axios, "get").returns(resolved);
+
+		store.dispatch(actions.fetchLatestBaseConversionRates(baseCurrency))
+			.then(() => {
+				const storeActions = store.getActions();
+				expect(storeActions).toEqual(expectedActions);
+			})
 	});
 
 	it("dispatches swapCurrencyAction to reducer to update redux store", () => {

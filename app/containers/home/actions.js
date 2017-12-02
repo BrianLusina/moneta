@@ -3,8 +3,40 @@
  */
 import {
 	changeCurrencyAmountAction,
-	swapCurrencyAction
+	swapCurrencyAction,
+	fetchConversionRatesFailureAction,
+	fetchConversionRatesSuccessAction,
+	fetchConversionRatesRequestAction
 } from "./actionCreators";
+import {
+	ajaxCallFailureAction,
+	ajaxCallBeginAction,
+	ajaxCallSuccess
+} from "../../actionCreators/ajaxActionCreator";
+import {
+	getLatestBaseConversionRates
+} from "./api";
+
+/**
+ * Gets the latest conversion rates for the base currency
+ * @param {String} currency
+ * @return {Function} dispatch function that dispatches actions to the redux store
+ * */
+export function fetchLatestBaseConversionRates(currency){
+	return dispatch => {
+		dispatch(ajaxCallBeginAction());
+		dispatch(fetchConversionRatesRequestAction());
+		return getLatestBaseConversionRates(currency)
+			.then(response => {
+				dispatch(ajaxCallSuccess());
+				dispatch(fetchConversionRatesSuccessAction(response.data));
+			})
+			.catch(error => {
+				dispatch(ajaxCallFailureAction(error));
+				dispatch(fetchConversionRatesFailureAction(error));
+			})
+	}
+}
 
 /**
  * Swap currency action that handles swapping the currency of the base and quote currencies
