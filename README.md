@@ -13,6 +13,8 @@
 Moneta is a simple currency converter application built in [React Native](https://facebook.github.io/react-native/) and scaffolded with the [create-react-native-app](https://github.com/react-community/create-react-native-app) CLI. The objective of this application was a simple demonstration of using simple components and tools that can be easily applied in [React](https://facebook.github.io/react) for building web applications. This means this app's components and structure can be easily used to build a web app with the very same functionality with little re-write. 
 (PS: Moneta is roughly translated to money in Latin)
 
+App can be found on [Expo](https://exp.host/@lusinabrian/moneta)
+
 ## Getting Started
 
 You will obviously need to know how *React Native* and *React* work in the background in order to use this project. Also, you will need to have [Expo](https://expo.io/) app installed on your testing device, if using a testing device or have an emulator setup, either Android or IOS, the [react native getting started guide has this explained already](https://facebook.github.io/react-native/docs/getting-started.html).
