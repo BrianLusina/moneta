@@ -6,9 +6,10 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import * as actions from "./actions";
+import { updateConversionRates } from "../../actions/appActions";
 import {bindActionCreators} from "redux";
-import {View, StatusBar, Text, FlatList} from "react-native";
-import currencies from "./data";
+import {FlatList, StatusBar, View} from "react-native";
 import CurrencyListItem from "../../components/List/ListItem";
 import Separator from "../../components/List/Separator";
 
@@ -20,30 +21,47 @@ import Separator from "../../components/List/Separator";
 export class CurrencyList extends Component {
 	constructor(props, context) {
 		super(props, context);
-		this.state = {
-
-		};
-
+		this.state = {};
 		this.handleSelectedCurrencyItem = this.handleSelectedCurrencyItem.bind(this);
 	}
 
 	/**
 	 * Handles selected currency items in flat list
 	 * */
-	handleSelectedCurrencyItem(){
+	handleSelectedCurrencyItem(currency) {
 
+		const {type} = this.props.navigation.state.params;
+
+		if (type === "base") {
+			//dispatch change base currency
+			this.props.actions.changeBaseCurrency(currency);
+			this.props.updateConversionRates(currency, type);
+		} else if (type === "quote") {
+			// dispatch change quote currency
+			this.props.actions.changeQuoteCurrency(currency);
+			this.props.updateConversionRates(currency, type);
+		}
+		this.props.navigation.goBack(null);
 	}
 
 	/**
 	 * Creates the render items for the FlatList*/
-	createRenderItems(item){
+	createRenderItems(item) {
+		// check for the comparison currency and update the selection based on the selected
+		// currency and also check if we are updating the quote currency
+		let comparisonCurrency = this.props.currentBase;
+		if(this.props.navigation.state.params.type === "quote"){
+			comparisonCurrency = this.props.currentQuote;
+		}
+
 		return (
 			<CurrencyListItem
 				text={item}
-				selected={true}
-				onClick={this.handleSelectedCurrencyItem}
+				selected={item === comparisonCurrency}
+				onClick={() => this.handleSelectedCurrencyItem(item)}
+				iconBackground={this.props.primaryColor}
 			/>
-		)
+		);
 	}
 
 	/**
@@ -51,11 +69,11 @@ export class CurrencyList extends Component {
 	 */
 	render() {
 		return (
-			<View style={{flex:1}}>
+			<View style={{flex: 1}}>
 				<StatusBar barStyle="default" translucent={false}/>
 				<FlatList
-					data={currencies}
-					renderItem={this.createRenderItems({item})}
+					data={this.props.currencies}
+					renderItem={({item}) => this.createRenderItems(item)}
 					keyExtractor={item => item}
 					itemSeparatorComponent={Separator}
 				/>
@@ -67,7 +85,9 @@ export class CurrencyList extends Component {
 /**
  * Validates CurrencyList prop types
  */
-CurrencyList.propTypes = {};
+CurrencyList.propTypes = {
+	navigation: PropTypes.object
+};
 
 /**
  * maps the state of the redux store to the CurrencyList props
@@ -77,7 +97,10 @@ CurrencyList.propTypes = {};
  */
 function mapStateToProps(state, ownProps) {
 	return {
-		state: state.currency
+		currencies : state.currencyList.currencies,
+		currentBase: state.currencyList.currentBase,
+		currentQuote:state.currencyList.currentQuote,
+		primaryColor: state.themes.primaryColor,
 	};
 }
 
@@ -89,7 +112,8 @@ function mapStateToProps(state, ownProps) {
  */
 function mapDispatchToProps(dispatch) {
 	return {
-		// actions: bindActionCreators(actions, dispatch)
+		actions: bindActionCreators(actions, dispatch),
+		updateConversionRates : bindActionCreators(updateConversionRates, dispatch)
 	};
 }
 
@@ -98,4 +122,4 @@ function mapDispatchToProps(dispatch) {
  * actions to the store and props of this container to
  * state of store
  */
-export default connect(mapStateToProps, mapDispatchToProps)(CurrencyList)
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencyList);

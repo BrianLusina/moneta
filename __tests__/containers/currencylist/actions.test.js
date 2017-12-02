@@ -4,7 +4,9 @@ import * as types from "../../../app/containers/currencylist/actionTypes";
 import {
 	fetchCurrencyListRequestAction,
 	fetchCurrencyListFailureAction,
-	fetchCurrencyListSuccessAction
+	fetchCurrencyListSuccessAction,
+	changeQuoteCurrencyAction,
+	changeBaseCurrencyAction,
 } from "../../../app/containers/currencylist/actionCreator";
 import {
 	ajaxCallBeginAction,
@@ -105,5 +107,32 @@ describe("currency actions", () => {
 			done();
 		});
 	});
+
+	it("dispatches changeBaseCurrencyAction", () => {
+		let baseCurrency = "USD";
+		const expectedActions = [changeBaseCurrencyAction(baseCurrency)];
+
+		store.dispatch(actions.changeBaseCurrency(baseCurrency));
+		const storeActions = store.getActions();
+
+		// the expected actions from the store are what we expect
+		expect(storeActions).toEqual(expectedActions);
+
+		// expect that the amount has been updated;
+		// expect(store.getState().currencies.amount).toEqual(baseCurrency);
+	});
+
+	it("dispatches changeQuoteCurrency Action", () => {
+		let quoteCurrency = "GBP";
+		const expectedActions = [changeQuoteCurrencyAction(quoteCurrency)];
+
+		store.dispatch(actions.changeQuoteCurrency(quoteCurrency));
+		const storeActions = store.getActions();
+
+		expect(storeActions).toEqual(expectedActions);
+
+		// check that the store was updated
+		// expect(store.getState().currencies.quoteCurrency).toEqual(quoteCurrency);
+	})
 
 });

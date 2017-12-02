@@ -19,16 +19,28 @@ export default function reducer(state = initialState, action) {
 		return Object.assign({}, state, {
 			isFetching: true
 		});
-	case types.FETCH_CURRENTY_LIST_SUCCESS:
+	case types.FETCH_CURRENCY_LIST_SUCCESS:
 		return Object.assign({}, state, {
 			isFetching: false,
 			currencies: action.payload
 		});
-	case types.FETCH_CURRENTY_LIST_FAILURE:
+	case types.FETCH_CURRENCY_LIST_FAILURE:
 		return Object.assign({}, state, {
-			isFetching:false,
+			isFetching: false,
 			error: action.error
 		});
+
+	case types.CHANGE_BASE_CURRENCY:
+		return Object.assign({}, state, {
+			currentBase: action.baseCurrency
+		});
+
+	case types.CHANGE_QUOTE_CURRENCY:
+		return {
+			...state,
+			currentQuote: action.quoteCurrency
+		};
+
 	default:
 		return state;
 	}
