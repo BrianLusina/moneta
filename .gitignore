@@ -5,6 +5,8 @@ build/
 .env/
 .env
 .expo/
+*.apk
+*.jks
 __snapshots__/
 *.js.snap
 ## Node template
