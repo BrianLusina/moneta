@@ -98,6 +98,79 @@ Deployment can be done to either Expo, PlayStore or AppStore or all three of the
 
 Details on how to deploy this application can be found [here](https://docs.expo.io/versions/latest/guides/building-standalone-apps.html) and [here](https://github.com/react-community/create-react-native-app/blob/master/EJECTING.md)
 
+Deplyment for Playstore can be done after a build for the apk is done on Expo. To do this, run the script:
+
+```bash
+yarn build-android # build Android apk
+yarn build-ios # build ios ipa
+```
+> These commands will run the Android and IOS applications.
+
+They can not be run concurrently, so to check the status of builds use:
+
+```bash
+yarn build-status
+```
+> Will tell you the status of the current build it any.
+
+You should get an output like this:
+
+```bash
+$ exp build:status
+[exp] Making sure project is set up correctly...
+[exp] Your project looks good!
+[exp] Checking if current build exists...
+
+[exp] ============
+[exp] Build Status
+[exp] ============
+
+[exp] Android: Build in progress...
+Done in 12.00s.
+```
+> This is the build status for Android project
+
+The same output will be seen for IOS. After a build is done (which will take around 30 minutes or less).
+
+You can fetch the APK from the build status output:
+
+```bash
+$ yarn build-status
+$ exp build:status
+[exp] Making sure project is set up correctly...
+[exp] Your project looks good!
+[exp] Checking if current build exists...
+
+[exp] ============
+[exp] Build Status
+[exp] ============
+
+[exp] Android:
+[exp] APK: <APK_URL>
+
+Done in 12.96s
+```
+> The `<APK_URL>` is the url of the APK that you can download the signed apk
+
+Fetching keystores can be done as below:
+
+```bash
+$ yarn fetch-keystore
+# output
+exp fetch:android:keystore
+[exp] Retreiving Android keystore for @lusinabrian/moneta
+[exp] Writing keystore to <PROJECT_DIR>/<KEYSTORE_NAME>.jks...
+[exp] Done writing keystore to disk.
+[exp] Save these important values as well:
+
+Keystore password: <KEYSTORE_PASSWORD>
+Key alias:         <KEY_ALIAS>
+Key password:      <KEY_PASSWORD>
+
+[exp] All done!
+Done in 6.96s.
+```
+> This will write the keystore file to the project root and output the keystore properties to STDOUT
 
 ## Built With
 
