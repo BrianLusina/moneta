@@ -6,6 +6,8 @@ patch:
   'npm:extend:20180424':
     - react-native-scripts > xdl > @expo/ngrok > request > extend:
         patched: '2020-07-27T06:49:15.426Z'
+    - snyk > proxy-agent > pac-proxy-agent > get-uri > extend:
+        patched: '2020-07-27T06:50:52.731Z'
   'npm:hoek:20180212':
     - react-native-scripts > xdl > @expo/ngrok > request > hawk > hoek:
         patched: '2020-07-27T06:49:15.426Z'
