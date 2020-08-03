@@ -73,7 +73,7 @@
     "axios": "^0.18.1",
     "color": "^2.0.1",
     "expo": "^22.0.4",
-    "hoist-non-react-statics": "^2.3.1",
+    "hoist-non-react-statics": "^2.5.5",
     "moment": "^2.27.0",
     "prop-types": "^15.6.0",
     "react": "^16.0.0-beta.5",
