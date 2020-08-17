@@ -70,7 +70,7 @@
     "appcenter": "^1.0.1",
     "appcenter-analytics": "^1.0.1",
     "appcenter-crashes": "^1.0.1",
-    "axios": "^0.18.1",
+    "axios": "^0.19.2",
     "color": "^2.0.1",
     "expo": "^22.0.4",
     "hoist-non-react-statics": "^2.5.5",
