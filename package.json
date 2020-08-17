@@ -66,7 +66,7 @@
     ]
   },
   "dependencies": {
-    "@expo/vector-icons": "^6.2.0",
+    "@expo/vector-icons": "^6.3.1",
     "appcenter": "^1.0.1",
     "appcenter-analytics": "^1.0.1",
     "appcenter-crashes": "^1.0.1",
