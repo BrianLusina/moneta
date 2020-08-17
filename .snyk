@@ -22,6 +22,10 @@ patch:
         patched: '2020-07-27T06:49:15.426Z'
     - react-native-scripts > xdl > request-promise-native > request-promise-core > lodash:
         patched: '2020-07-27T06:49:15.426Z'
+    - remote-redux-devtools > redux-devtools-instrument > lodash:
+        patched: '2020-08-17T07:29:46.780Z'
+    - remote-redux-devtools > remotedev-utils > lodash:
+        patched: '2020-08-17T07:29:46.780Z'
   'npm:stringstream:20180511':
     - react-native-scripts > xdl > @expo/ngrok > request > stringstream:
         patched: '2020-07-27T06:49:15.426Z'

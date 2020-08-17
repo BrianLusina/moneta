@@ -27,7 +27,7 @@
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.4",
-    "remote-redux-devtools": "^0.5.16",
+    "remote-redux-devtools": "^0.5.13",
     "remotedev-rn-debugger": "^0.8.3",
     "sinon": "^4.5.0"
   },
