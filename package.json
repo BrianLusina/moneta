@@ -72,7 +72,7 @@
     "appcenter-crashes": "^1.0.1",
     "axios": "^0.19.2",
     "color": "^2.0.1",
-    "expo": "^22.0.4",
+    "expo": "^38.0.9",
     "hoist-non-react-statics": "^2.5.5",
     "moment": "^2.27.0",
     "prop-types": "^15.6.0",
