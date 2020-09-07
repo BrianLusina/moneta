@@ -6,7 +6,7 @@
     "codecov": "^3.7.1",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-15": "^1.4.2",
-    "enzyme-adapter-react-16": "^1.15.3",
+    "enzyme-adapter-react-16": "^1.15.4",
     "eslint": "^5.16.0",
     "enzyme-to-json": "^3.5.0",
     "eslint-config-airbnb": "^16.1.0",
