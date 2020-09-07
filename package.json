@@ -86,6 +86,7 @@
     "redux-promise": "^0.6.0",
     "snyk": "^1.389.0"
     "redux-thunk": "^2.3.0",
+    "snyk": "^1.389.0"
   },
   "snyk": true
 }
