@@ -6,7 +6,7 @@
     "codecov": "^3.7.1",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-15": "^1.4.2",
-    "enzyme-adapter-react-16": "^1.15.3",
+    "enzyme-adapter-react-16": "^1.15.4",
     "eslint": "^5.16.0",
     "enzyme-to-json": "^3.5.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -72,7 +72,7 @@
     "appcenter-crashes": "^3.1.1",
     "axios": "^0.20.0",
     "color": "^2.0.1",
-    "expo": "^22.0.4",
+    "expo": "^39.0.1",
     "hoist-non-react-statics": "^2.5.5",
     "moment": "^2.27.0",
     "prop-types": "^15.6.0",
@@ -84,8 +84,8 @@
     "react-redux": "^5.1.2",
     "redux": "^3.7.2",
     "redux-promise": "^0.6.0",
-    "redux-thunk": "^2.2.0",
     "snyk": "^1.389.0"
+    "redux-thunk": "^2.3.0",
   },
   "snyk": true
 }
